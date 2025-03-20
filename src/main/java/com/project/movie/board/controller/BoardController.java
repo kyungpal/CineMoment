@@ -451,7 +451,7 @@ public class BoardController extends BaseController {
 
 	    String movie_title = (String) boardMap.get("movie_title");
 	    String boardTitle1 = (String) boardMap.get("boardTitle");
-	    String boardTitle = "[" + movie_title + "]" + boardTitle1;
+	    String boardTitle = boardTitle1;
 	    boardMap.put("boardTitle", boardTitle);
 
 	    
