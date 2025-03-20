@@ -1,0 +1,770 @@
+DROP TABLE EVENT_DETAIL_IMAGE;
+DROP TABLE EVENTBOARD;
+DROP TABLE MOVIE_DETAIL_IMAGE;
+DROP TABLE MOVIE_DETAILS;
+DROP TABLE MOVIE_MEMBER;
+DROP TABLE MOVIE_ORDER;
+DROP TABLE MOVIE_SEAT;
+DROP TABLE MOVIE_SEAT1;
+DROP TABLE MOVIE_SEAT2;
+DROP TABLE NOTICEBOARD;
+DROP TABLE ONELINEREVIEW;
+DROP TABLE REVIEW_DETAIL_IMAGE;
+DROP TABLE REVIEWBOARD;
+
+CREATE TABLE "EVENT_DETAIL_IMAGE" 
+   (	"IMAGE_ID" NUMBER(20,0), 
+	"BOARDNO" NUMBER(20,0), 
+	"FILENAME" VARCHAR2(50 BYTE), 
+	"FILETYPE" VARCHAR2(40 BYTE), 
+	"CREDATE" DATE DEFAULT SYSDATE
+   );
+
+Insert into EVENT_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE) values (2,2,'oPdwN2A47eeOosJJT5835MbhiLJLyt4y.jpg','detail_image',to_date('23/03/07','RR/MM/DD'));
+Insert into EVENT_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE) values (1,1,'5IakEwOu6JYZUTcQCP4SoFIUO8qpe6k4.jpg','detail_image',to_date('23/03/07','RR/MM/DD'));
+Insert into EVENT_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE) values (3,3,'GmKrZglakqBOat2CJJBKuAwyRb3Rm5cx.jpg','detail_image',to_date('23/03/07','RR/MM/DD'));
+
+CREATE TABLE "EVENTBOARD" 
+   (	"BOARDNO" NUMBER, 
+	"BOARDTITLE" VARCHAR2(200 BYTE), 
+	"BOARDWRITEDATE" DATE DEFAULT sysdate
+   );
+
+Insert into EVENTBOARD (BOARDNO,BOARDTITLE,BOARDWRITEDATE) values (1,'보고가슈 오리지널 티켓 NO.01 <스즈메의 문단속>',to_date('23/03/07','RR/MM/DD'));
+Insert into EVENTBOARD (BOARDNO,BOARDTITLE,BOARDWRITEDATE) values (3,'2023 WBC 2배로 즐기는 법!! 국가대표도 관객들도 파이팅 해야지!!',to_date('23/03/07','RR/MM/DD'));
+Insert into EVENTBOARD (BOARDNO,BOARDTITLE,BOARDWRITEDATE) values (2,'<스즈메의 문단속> 굿즈패키지 출시',to_date('23/03/07','RR/MM/DD'));
+
+  CREATE UNIQUE INDEX "SYS_C007760" ON "EVENTBOARD" ("BOARDNO");
+  ALTER TABLE "EVENTBOARD" MODIFY ("BOARDTITLE" NOT NULL ENABLE);
+  ALTER TABLE "EVENTBOARD" ADD PRIMARY KEY ("BOARDNO") ENABLE;
+
+CREATE TABLE "MOVIE_DETAIL_IMAGE" 
+   (	"IMAGE_ID" NUMBER(20,0), 
+	"MOVIE_ID" NUMBER(20,0), 
+	"FILENAME" VARCHAR2(50 BYTE), 
+	"FILETYPE" VARCHAR2(40 BYTE), 
+	"CREDATE" DATE DEFAULT SYSDATE
+   );
+
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (1,1,'1.jpg','detail_image',to_date('23/02/23','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (2,2,'2.jpg','detail_image',to_date('23/02/23','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (3,3,'3.jpg','detail_image',to_date('23/02/23','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (4,4,'4.jpg','detail_image',to_date('23/02/23','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (5,5,'5.jpg','detail_image',to_date('23/02/23','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (6,6,'6.jpg','detail_image',to_date('23/02/23','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (7,7,'7.jpg','detail_image',to_date('23/02/26','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (8,8,'8.jpg','detail_image',to_date('23/02/26','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (409,9,'spiderman.jpg','detail_image',to_date('23/03/01','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (410,10,'spiderman2.jpg','detail_image',to_date('23/03/01','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (415,11,'86826_1000.jpg','detail_image',to_date('23/03/02','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (416,12,'86824_1000.jpg','detail_image',to_date('23/03/02','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (418,13,'soulmate.jpg','detail_image',to_date('23/03/03','RR/MM/DD'));
+Insert into MOVIE_DETAIL_IMAGE (IMAGE_ID,MOVIE_ID,FILENAME,FILETYPE,CREDATE) values (420,14,'86843_1000.jpg','detail_image',to_date('23/03/08','RR/MM/DD'));
+
+  CREATE UNIQUE INDEX "SYS_C007730" ON "MOVIE_DETAIL_IMAGE" ("IMAGE_ID");
+  ALTER TABLE "MOVIE_DETAIL_IMAGE" ADD PRIMARY KEY ("IMAGE_ID") ENABLE;
+
+CREATE TABLE "MOVIE_DETAILS" 
+   (	"MOVIE_ID" NUMBER(20,0), 
+	"MOVIE_TITLE" VARCHAR2(100 BYTE), 
+	"MOVIE_GENRE" VARCHAR2(50 BYTE), 
+	"MOVIE_TIME" VARCHAR2(50 BYTE), 
+	"MOVIE_DIRECTOR" VARCHAR2(50 BYTE), 
+	"MOVIE_ACTOR" VARCHAR2(50 BYTE), 
+	"MOVIE_STORY" VARCHAR2(2000 BYTE), 
+	"MOVIE_OPENDAY" VARCHAR2(50 BYTE), 
+	"MOVIE_RANK" VARCHAR2(50 BYTE), 
+	"MOVIE_PRODUCER" VARCHAR2(50 BYTE), 
+	"MOVIE_STATUS" VARCHAR2(50 BYTE) DEFAULT 'y', 
+	"MOVIE_KEYWORD" VARCHAR2(100 BYTE)
+   );
+
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (2,'더 퍼스트 슬램덩크','애니메이션','124분','이노우에 다케히코',null,'전국 제패를 꿈꾸는 북산고 농구부 5인방의 꿈과 열정, 멈추지 않는 도전을 그린 영화','2023/01/31','12세 이상 관람가','이노우에 다케히코','y',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (4,'아바타: 물의 길','판타지,액션','192분','제임스 카메론','샘 워딩턴','<아바타: 물의 길>은 판도라 행성에서 <br>
+''제이크 설리''와 ''네이티리''가 이룬 가족이 겪게 되는 무자비한 위협과 <br>
+살아남기 위해 떠나야 하는 긴 여정과 전투, <br>
+그리고 견뎌내야 할 상처에 대한 이야기를 그렸다. <br>
+<br>
+월드와이드 역대 흥행 순위 1위를 기록한 전편 <아바타>에 이어<br>
+제임스 카메론 감독이 13년만에 선보이는 영화로, <br>
+샘 워싱턴, 조 샐다나, 시고니 위버, 스티븐 랭, 케이트 윈슬렛이 출연하고<br>
+존 랜도가 프로듀싱을 맡았다.<br>','2022/12/14','12세 이상 관람가','라이트스톰 엔터테인먼트','n',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (7,'스즈메의 문단속','애니메이션','122분','신카이 마코토',null,'“이 근처에 폐허 없니? 문을 찾고 있어”<br>
+규슈의 한적한 마을에 살고 있는 소녀 ‘스즈메’는<br>
+문을 찾아 여행 중인 청년 ‘소타’를 만난다.<br>
+ <br>
+그의 뒤를 쫓아 산속 폐허에서 발견한 낡은 문.<br>
+‘스즈메’가 무언가에 이끌리듯 문을 열자 마을에 재난의 위기가 닥쳐오고<br>
+가문 대대로 문 너머의 재난을 봉인하는 ‘소타’를 도와 간신히 문을 닫는다.<br>
+ <br>
+“닫아야만 하잖아요, 여기를!”<br>
+재난을 막았다는 안도감도 잠시,<br>
+수수께끼의 고양이 ‘다이진’이 나타나 ‘소타’를 의자로 바꿔 버리고<br>
+일본 각지의 폐허에 재난을 부르는 문이 열리기 시작하자<br>
+‘스즈메’는 의자가 된 ‘소타’와 함께 재난을 막기 위한 여정에 나선다.<br>
+ <br>
+“꿈이 아니었어”<br>
+규슈, 시코쿠, 고베, 도쿄<br>
+재난을 막기 위해 일본 전역을 돌며 필사적으로 문을 닫아가던 중<br>
+어릴 적 고향에 닿은 ‘스즈메’는 잊고 있던 진실과 마주하게 되는데…<br>','2023/03/08','12세 이상 관람가','STORY inc','y',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (8,'대외비','범죄/느와르','116분','이원태','조진웅,이성민','“몰랐나? 원래 세상은 더럽고, 인생은 서럽다.”<br>
+1992년 부산, 밑바닥 정치 인생을 끝내고 싶은 만년 국회의원 후보 ‘해웅’.<br>
+‘해웅’은 이번 선거에서만큼은 금뱃지를 달 것이라 확신했지만,<br>
+정치판을 뒤흔드는 권력 실세 ‘순태’에게 버림받으며 지역구 공천에서 탈락한다.<br>
+<br>
+“누가 센 지는 손에 뭘 쥐고 있는가 보라 안 했습니까?”<br>
+‘순태’에 의해 짜여진 선거판을 뒤집기 위해 부산 지역 재개발 계획이 담긴 대외비 문서를 입수한 ‘해웅’.<br>
+행동파 조폭 ‘필도’를 통해 선거 자금까지 마련한 ‘해웅’은 무소속으로 선거판에 뛰어들어 승승장구한다.<br>
+‘순태’ 역시 ‘해웅’이 가진 대외비 문서의 존재를 알게 되고, 점차 ‘해웅’의 숨통을 조여오는데…<br>
+<br>
+대한민국을 뒤집을 비밀 문서,<br>
+이 판을 뒤집는 놈이 대한민국을 뒤집는다!<br>','2023/03/01','15세 이상 관람가','(주)트윈필름','y',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (11,'귀멸의 칼날-상현집결, 그리고 도공 마을로','애니메이션','110분','소토자키 하루오','하나에 나츠키','혈귀가 숨어있는 거리에 잠입한 탄지로 일행.<br>
+강력한 상현 6 혈귀 남매 규타로 & 다키와의 전투 끝에 탄지로 일행은 궁지에 몰린다.<br>
+절체절명 위기의 순간에도 흔들리지 않는 곧은 의지로<br>
+규타로에 맞서는 탄지로, 젠이츠, 이노스케 그리고 음주 우즈이 텐겐.<br>
+환락의 거리 속 혈귀를 쓰러트리기 위한 그들의 치열한 전투가 시작된다.<br>
+<br>
+한편, 키부츠지 무잔은 무한성에 상현 혈귀들을 소집시키고<br>
+탄지로는 새로운 칼을 찾아 도공 마을로 향하는데...<br>','2023/03/02','15세 이상 관람가','유포테이블','y',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (12,'샤잠! 신들의 분노','액션','130분','데이비드 F.샌드버그','제커리 리바이','분노한 신들, 혼돈의 세상<br>
+진정한 슈퍼히어로가 깨어난다<br>
+<br>
+신들의 힘을 갖게 된 빌리(애셔 앤젤)와 친구들은<br>
+각자의 방법으로 슈퍼히어로의 삶을 즐기게 된다.<br>
+그러던 그들 앞에 잃어버린 힘을 되찾고자<br>
+그리스 여신 헤스페라(헬렌 미렌)와 칼립소(루시 리우)가 나타나게 되고,<br>
+세상은 혼돈에 빠지게 되는데…<br>','2023/03/15','12세 이상 관람가','DC 스튜디오','e',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (14,'치킨래빗-잃어버린 보물을 찾아서','애니메이션','92분','벤자밋 모스켓, 벤 스타센','박시윤, 김용','쫑긋한 귀, 앙증맞은 꼬리, 그리고.. 갑자기 닭발…?!<br>
+토끼인듯 닭인듯 반반매력으로 무장한 뉴 히어로! ‘치킨래빗’의 탄생!<br>
+<br>
+아버지 ‘피터’왕의 뒤를 이을 위대한 모험왕을 꿈꾸며 자란 ‘치킨래빗’은<br>
+온 국민이 지켜보는 왕립 모험가 협회 테스트에서 형편없는 실력으로 웃음거리가 되고 만다.<br>
+<br>
+명예 회복을 위해 아버지가 눈 앞에서 놓쳤던 전설 속 보물 ‘어둠의 햄스터’를 찾고 싶은<br>
+‘치킨 래빗’은 만능집사 거북이 ‘에이브’, 액션마스터 스컹크 ‘메그’와 함께 모험에 나선다.<br>
+<br>
+그러나 보물을 찾아 왕좌를 빼앗기 위해 탈옥한 삼촌 ‘라팡’의 공격과<br>
+빌런들의 끝없는 방해로 닥친 위기의 순간,<br>
+‘치킨래빗’에게 숨겨져 있던 특별한 힘이 깨어나게 되는데…<br>
+<br>
+과연 ‘치킨래빗’은 ‘어둠의 햄스터’를 찾아 왕국을 지킬 수 있을까?<br>','2023/03/18','전체 관람가','벨기에,프랑스','e',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (13,'소울메이트','드라마','123분','민용근','김다미,전소니,변우석','“날도 더웠고 수업도 지루했고.. 그렇게 졸리고 나른하던 날에 너를 처음 만났어”<br>
+1998년, 처음 만났다<br>
+<br>
+“누굴 좋아하면 용기내야 된대”<br>
+2004년, 첫사랑이 생겼다<br>
+<br>
+“몰랐어? 나 원래 이렇게 살아”<br>
+2010년, 각자 어른이 되어간다<br>
+<br>
+“가장 그리운 건…너였어”<br>
+2014년, 흔적을 따라간다<br>
+<br>
+“이젠 니 얼굴을 그리고 싶어. 사랑없인 그릴 수조차 없는 그림 말이야”<br>
+지금, 그리움을 그리다<br>
+<br>
+2023년 3월 15일, 당신의 <소울메이트>가 찾아옵니다.<br>','2023/03/15','12세 이상 관람가','클라이맥스','e',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (5,'교섭','드라마,스릴러','108분','임순례','황정민,현빈','“어떤 경우라도 희생자를 안 만드는 게 이 협상의 기조 아닙니까?”<br>
+<br>
+분쟁지역 아프가니스탄에서 한국인들이 탈레반에게 납치되는 최악의 피랍사건이 발생한다.<br>
+교섭 전문이지만 아프가니스탄은 처음인 외교관 재호(황정민)가 현지로 향하고,<br>
+국정원 요원 대식(현빈)을 만난다.<br>
+원칙이 뚜렷한 외교관과 현지 사정에 능통한 국정원 요원.<br>
+입장도 방법도 다르지만, 두 사람은 인질을 살려야 한다는 목표를 향해 함께 나아간다.<br>
+살해 시한은 다가오고, 협상 상대, 조건 등이 시시각각 변하는 상황에서<br>
+교섭의 성공 가능성은 점점 희박해져 가는데...<br>','2023/01/18','12세 이상 관람가','(주)영화사수박','y',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (1,'앤트맨과 와스프 : 퀀텀매니아','액션,어드벤처,SF','125분','페이턴 리드','폴 러드','슈퍼히어로 파트너인 ''스캇 랭''(폴 러드)과 ''호프 반 다인''(에반젤린 릴리),<br>
+호프의 부모 ''재닛 반 다인''(미셸 파이퍼)과 ''행크 핌''(마이클 더글라스),<br>
+그리고 스캇의 딸 ''캐시 랭''(캐서린 뉴튼)까지<br>
+미지의 ''양자 영역'' 세계 속에 빠져버린 ''앤트맨 패밀리''.<br>
+<br>
+그 곳에서 새로운 존재들과 무한한 우주를 다스리는 정복자 ''캉''을 만나며,<br>
+그 누구도 예상 못 한 모든 것의 한계를 뛰어넘는 모험을 시작하게 되는데…<br>
+<br>
+2023년 첫 번째 마블 블록버스터<br>
+2월, 무한한 우주의 정복자가 깨어난다!<br>','2023/02/15','12세 이상 관람가','마블스튜디오','n',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (3,'다음 소희','드라마','137분','정주리','김시은,배두나,박우영','“나 이제 사무직 여직원이다?”<br>
+춤을 좋아하는 씩씩한 열여덟 고등학생 소희.<br>
+졸업을 앞두고 현장실습을 나가게 되면서 점차 변하기 시작한다.<br>
+<br>
+“막을 수 있었잖아. 근데 왜 보고만 있었냐고”<br>
+오랜만에 복직한 형사 유진.<br>
+사건을 조사하던 중, 새로운 사실을 발견하고 그 자취를 쫓는다.<br>
+<br>
+같은 공간 다른 시간, 언젠가 마주쳤던 두 사람의 이야기.<br>
+우리는 모두 그 애를 만난 적이 있다.<br>','2023/02/08','15세 이상 관람가','트윈플러스파트너스, 크랭크업필름','n',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (6,'영웅','드라마,시대극','120분','윤제균','정성화,김고은','어머니 ‘조마리아’(나문희)와 가족들을 남겨둔 채<br>
+고향을 떠나온 대한제국 의병대장 ‘안중근’(정성화).<br>
+<br>
+동지들과 함께 네 번째 손가락을 자르는 단지동맹으로<br>
+조국 독립의 결의를 다진 안중근은<br>
+조선 침략의 원흉인 ‘이토 히로부미’를<br>
+3년 내에 처단하지 못하면 자결하기로 피로 맹세한다.<br>
+<br>
+그 약속을 지키기 위해 블라디보스토크를 찾은 안중근.<br>
+오랜 동지 ‘우덕순’(조재윤), 명사수 ‘조도선’(배정남), 독립군 막내 ‘유동하’(이현우),<br>
+독립군을 보살피는 동지 ‘마진주’(박진주)와 함께 거사를 준비한다.<br>
+<br>
+한편 자신의 정체를 감춘 채 이토 히로부미에게 접근해<br>
+적진 한복판에서 목숨을 걸고 정보를 수집하던 독립군의 정보원 ‘설희’(김고은)는<br>
+이토 히로부미가 곧 러시아와의 회담을 위해<br>
+하얼빈을 찾는다는 일급 기밀을 다급히 전한다.<br>
+<br>
+드디어 1909년 10월 26일,<br>
+이날만을 기다리던 안중근은<br>
+하얼빈역에 도착한 이토 히로부미를 향해<br>
+주저 없이 방아쇠를 당긴다.<br>
+현장에서 체포된 그는 전쟁 포로가 아닌 살인의 죄목으로,<br>
+조선이 아닌 일본 법정에 서게 되는데…<br>
+<br>
+누가 죄인인가, 누가 영웅인가!<br>','2022/12/21','12세 이상 관람가','JK필름','n',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (9,'어메이징 스파이더맨','슈퍼히어로,액션','136분','마크 웹','앤드류 가필드, 엠마 스톤','전세계를 사로잡은 영웅, 그러나 아무도 몰랐던 그의 이야기.<br>
+<br>
+<br>
+<br>
+어릴적 사라진 부모 대신 삼촌 내외와 살고 있는 피터 파커(앤드류 가필드)는 여느 고등학생처럼 평범한 학교 생활을 하며 일상을 보내고, 같은 학교 학생 그웬 스테이시(엠마 스톤)와 첫사랑에 빠져 우정과 사랑, 그리고 둘 만의 비밀을 키워나간다. 그러던 어느 날 아버지가 사용했던 비밀스러운 가방을 발견하고 부모님의 실종사건에 대한 의심을 품게 된 그는 그 동안 숨겨져 왔던 과거의 비밀을 추적하게 된다.
+<br>
+<br>
+<br>
+아버지의 옛 동료 코너스 박사(리스 이판)의 실험실을 찾아가게 된 피터는 우연한 사고로 특별한 능력을 갖게 되고, 뜻밖의 피터의 도움으로 연구를 완성한 코너스 박사는 자신의 숨겨진 자아인 악당 <리자드>를 탄생시킨다. 세상을 위협하는 세력앞에 피터는 그의 인생을 통째로 바꾸어 버릴 일생일대의 선택, 바로 <스파이더맨>이라 불리우는 영웅이 되기로 결심하는데…
+<br>
+<br>
+<br>
+2012년 6월 28일, 스파이더맨의 숨겨진 비밀이 마침내 밝혀진다!','12/06/28','12세 이상 관람가','마블 엔터테인먼트','n',null);
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (10,'어메이징 스파이더맨2','슈퍼히어로,액션','142분','마크 웹','앤드류 가필드, 엠마 스톤','연습은 끝났다!<br>
+<br>
+적이 강해진 만큼 그도 강해져야만 한다!<br>
+<br>
+ <br>
+<br>
+스파이더맨의 삶에 완전히 적응한 피터 파커(앤드류 가필드)는 거미줄로 뉴욕을 활강하며 위험에 처한 시민들을 구해주고 사랑하는 연인 그웬(엠마 스톤)과 데이트를 즐기며 행복하게 살아간다. 그러던 어느 날, 스파이더맨의 열렬한 팬이자 오스코프사의 전기 엔지니어인 맥스(제이미 폭스)는 작업 중 치명적인 사고로 자신에게 엄청난 능력이 생긴 것을 발견한다. 하지만 이 능력으로 인해 뉴욕을 마비시킨 대규모 정전사태가 발생하고 사태를 해결하기 위해 나선 자신의 영웅 스파이더맨에게 공격을 당하자 배신감을 느끼고 분노한다. 여기에 해리 오스본(데인 드한)은 맥스에게 자신과 함께 스파이더맨에게 복수를 하자며 손을 내미는데…<br>
+<br>
+ <br>
+<br>
+더욱 강력해진 적들의 등장! 진짜 전쟁은 지금부터다!','2014/04/23','12세 이상 관람가','마블 엔터테인먼트','n',null);
+
+CREATE UNIQUE INDEX "SYS_C007701" ON "MOVIE_DETAILS" ("MOVIE_ID");
+ALTER TABLE "MOVIE_DETAILS" ADD PRIMARY KEY ("MOVIE_ID") ENABLE;
+
+
+CREATE TABLE "MOVIE_MEMBER" 
+   (	"MEMBER_ID" VARCHAR2(500 BYTE), 
+	"MEMBER_PW" VARCHAR2(500 BYTE), 
+	"MEMBER_NAME" VARCHAR2(500 BYTE), 
+	"MEMBER_HP1" VARCHAR2(500 BYTE), 
+	"MEMBER_HP2" VARCHAR2(500 BYTE), 
+	"MEMBER_HP3" VARCHAR2(500 BYTE), 
+	"JOINDATE" DATE DEFAULT sysdate
+   );
+
+Insert into MOVIE_MEMBER (MEMBER_ID,MEMBER_PW,MEMBER_NAME,MEMBER_HP1,MEMBER_HP2,MEMBER_HP3,JOINDATE) values ('paik','1212','백승권','010','9434','5488',to_date('23/02/28','RR/MM/DD'));
+Insert into MOVIE_MEMBER (MEMBER_ID,MEMBER_PW,MEMBER_NAME,MEMBER_HP1,MEMBER_HP2,MEMBER_HP3,JOINDATE) values ('admin','1234','관리자','111','111','111',to_date('23/02/28','RR/MM/DD'));
+Insert into MOVIE_MEMBER (MEMBER_ID,MEMBER_PW,MEMBER_NAME,MEMBER_HP1,MEMBER_HP2,MEMBER_HP3,JOINDATE) values ('1234','1234','1234','010','1234','1234',to_date('23/03/05','RR/MM/DD'));
+
+  CREATE UNIQUE INDEX "SYS_C007783" ON "MOVIE_MEMBER" ("MEMBER_ID");
+  ALTER TABLE "MOVIE_MEMBER" ADD PRIMARY KEY ("MEMBER_ID") ENABLE;
+
+
+CREATE TABLE "MOVIE_ORDER" 
+   (	"MORDER_SEQ_NUM" NUMBER(20,0), 
+	"MEMBER_ID" VARCHAR2(20 BYTE), 
+	"MOVIE_ID" NUMBER(20,0), 
+	"MOVIE_PRICE" NUMBER(20,0), 
+	"MOVIE_TITLE" VARCHAR2(100 BYTE), 
+	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
+	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
+	"MOVIE_PEOPLE_QTY" NUMBER(5,0), 
+	"MOVIE_FILENAME" VARCHAR2(60 BYTE), 
+	"PAY_METHOD" VARCHAR2(200 BYTE), 
+	"CARD_COM_NAME" VARCHAR2(50 BYTE), 
+	"CARD_PAY_MONTH" VARCHAR2(20 BYTE), 
+	"ORDERD_AGE" VARCHAR2(100 BYTE), 
+	"PAY_ORDERER_HP_NUM" VARCHAR2(20 BYTE), 
+	"TICKET_NUMBER" NUMBER(30,0), 
+	"PAY_ORDER_TIME" DATE DEFAULT sysdate, 
+	"CARD_NUMBER" VARCHAR2(200 BYTE), 
+	"MOVIE_SCREENING_DATE" VARCHAR2(200 BYTE), 
+	"MOVIE_RUNNING_TIME" VARCHAR2(200 BYTE)
+   );
+
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (400,'paik',1,9000,'앤트맨','대전','1',1,null,'카드','삼성','24/12','adult','010-1111-2222',123123123,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444',null,null);
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (401,'PAIK',1,9000,'앤트맨과 와스프 : 퀀텀매니아','대전','4',1,null,'card','삼성','24/12','adult','010-9434-5488',794018,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444',null,null);
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (402,'PAIK',2,9000,'더 퍼스트 슬램덩크','대전','1',1,null,'card','삼성','24/12','adult','010-9434-5488',763570,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444',null,null);
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (403,'PAIK',1,9000,'앤트맨과 와스프 : 퀀텀매니아','대전','4',1,null,'card','삼성','24/12','adult','010-9434-5488',806405,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444','2023-02-22','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (404,'PAIK',1,9000,'앤트맨과 와스프 : 퀀텀매니아','2관','1',1,null,'card','삼성','24/12','adult','010-9434-5488',327374,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444','2023-02-22','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (405,'PAIK',2,9000,'더 퍼스트 슬램덩크','1관','1',1,null,'card','삼성','24/12','adult','010-9434-5488',89570,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444','2023-02-22','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (406,'PAIK',2,9000,'더 퍼스트 슬램덩크','2관','2',1,null,'card','삼성','24/12','adult','010-9434-5488',833106,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444',null,'11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (407,'PAIK',2,9000,'더 퍼스트 슬램덩크','3관','4',1,null,'card','삼성','24/12','adult','010-9434-5488',778081,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444','2023-02-23','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (408,'PAIK',2,9000,'더 퍼스트 슬램덩크','3관','3',1,null,'card','삼성','24/12','adult','010-9434-5488',901124,to_date('23/02/22','RR/MM/DD'),'1111-2222-3333-4444','2023-02-23','13:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (420,'PAIK',6,9000,'영웅','1관','2',1,null,'card','삼성','24/12','adult','010-9434-5488',402137,to_date('23/02/26','RR/MM/DD'),'1111-2222-3333-4444','2023-02-28','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (421,'PAIK',8,9000,'대외비','3관','1',1,null,'card','삼성','24/12','adult','010-9434-5488',693150,to_date('23/02/26','RR/MM/DD'),'1111-2222-3333-4444','2023-03-02','15:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (422,'paik',6,9000,'영웅','1관','3',1,null,'card','삼성','24/12','adult','010-9434-5488',9295,to_date('23/02/28','RR/MM/DD'),'1111-2222-3333-4444','2023-03-01','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (423,'paik',8,9000,'대외비','1관','1',1,null,'card','삼성','24/12','adult','010-9434-5488',520953,to_date('23/03/03','RR/MM/DD'),'1111-2222-3333-4444','2023-03-03','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (424,'paik',8,9000,'대외비','1관','1',1,null,'card','삼성','24/12','adult','010-9434-5488',592675,to_date('23/03/03','RR/MM/DD'),'1111-2222-3333-4444','2023-03-03','17:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (440,'admin',11,9000,'귀멸의 칼날-상현집결, 그리고 도공 마을로','1관','2',1,null,'card','삼성','24/12','adult','010-9434-5488',263726,to_date('23/03/05','RR/MM/DD'),'1111-2222-3333-4444','2023-03-05','11:00');
+Insert into MOVIE_ORDER (MORDER_SEQ_NUM,MEMBER_ID,MOVIE_ID,MOVIE_PRICE,MOVIE_TITLE,MOVIE_PLACE,MOVIE_SEAT_NUMBER,MOVIE_PEOPLE_QTY,MOVIE_FILENAME,PAY_METHOD,CARD_COM_NAME,CARD_PAY_MONTH,ORDERD_AGE,PAY_ORDERER_HP_NUM,TICKET_NUMBER,PAY_ORDER_TIME,CARD_NUMBER,MOVIE_SCREENING_DATE,MOVIE_RUNNING_TIME) values (441,'admin',11,9000,'귀멸의 칼날-상현집결, 그리고 도공 마을로','1관','4',1,null,'card','삼성','24/12','adult','010-9434-5488',13052,to_date('23/03/08','RR/MM/DD'),'1111-2222-3333-4444','2023-03-08','11:00');
+
+  CREATE UNIQUE INDEX "SYS_C007720" ON "MOVIE_ORDER" ("MORDER_SEQ_NUM");
+  ALTER TABLE "MOVIE_ORDER" ADD PRIMARY KEY ("MORDER_SEQ_NUM") ENABLE;
+
+
+CREATE TABLE "MOVIE_SEAT" 
+   (	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
+	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
+	"SEATSTATUS" VARCHAR2(100 BYTE) DEFAULT 'y'
+   );
+
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','1','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','2','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','3','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','4','n');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','5','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','6','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','7','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','8','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','9','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','10','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','11','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','12','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','13','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','14','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','15','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','16','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','17','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','18','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','19','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','20','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','21','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','22','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','23','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','24','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','25','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','26','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','27','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','28','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','29','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','30','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','31','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','32','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','33','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','34','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','35','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','36','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','37','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','38','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','39','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','40','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','41','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','42','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','43','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','44','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','45','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','46','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','47','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','48','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','49','y');
+Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','50','y');
+
+CREATE UNIQUE INDEX "SYS_C007711" ON "MOVIE_SEAT" ("MOVIE_SEAT_NUMBER");
+ALTER TABLE "MOVIE_SEAT" ADD PRIMARY KEY ("MOVIE_SEAT_NUMBER") ENABLE;
+
+CREATE TABLE "MOVIE_SEAT1" 
+   (	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
+	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
+	"SEATSTATUS" VARCHAR2(100 BYTE) DEFAULT 'y'
+   );
+
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','1','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','2','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','3','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','4','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','5','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','6','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','7','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','8','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','9','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','10','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','11','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','12','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','13','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','14','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','15','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','16','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','17','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','18','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','19','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','20','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','21','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','22','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','23','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','24','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','25','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','26','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','27','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','28','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','29','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','30','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','31','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','32','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','33','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','34','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','35','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','36','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','37','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','38','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','39','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','40','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','41','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','42','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','43','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','44','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','45','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','46','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','47','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','48','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','49','y');
+Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','50','y');
+
+  CREATE UNIQUE INDEX "SYS_C007721" ON "MOVIE_SEAT1" ("MOVIE_SEAT_NUMBER");
+  ALTER TABLE "MOVIE_SEAT1" ADD PRIMARY KEY ("MOVIE_SEAT_NUMBER") ENABLE;
+
+CREATE TABLE "MOVIE_SEAT2" 
+   (	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
+	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
+	"SEATSTATUS" VARCHAR2(100 BYTE) DEFAULT 'y'
+   );
+
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','1','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','2','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','3','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','4','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','5','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','6','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','7','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','8','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','9','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','10','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','11','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','12','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','13','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','14','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','15','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','16','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','17','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','18','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','19','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','20','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','21','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','22','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','23','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','24','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','25','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','26','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','27','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','28','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','29','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','30','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','31','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','32','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','33','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','34','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','35','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','36','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','37','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','38','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','39','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','40','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','41','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','42','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','43','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','44','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','45','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','46','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','47','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','48','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','49','y');
+Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','50','y');
+
+  CREATE UNIQUE INDEX "SYS_C007722" ON "MOVIE_SEAT2" ("MOVIE_SEAT_NUMBER");
+  ALTER TABLE "MOVIE_SEAT2" ADD PRIMARY KEY ("MOVIE_SEAT_NUMBER") ENABLE;
+
+CREATE TABLE "NOTICEBOARD" 
+   (	"BOARDNO" NUMBER, 
+	"BOARDTITLE" VARCHAR2(200 BYTE), 
+	"BOARDCONTENT" VARCHAR2(4000 BYTE), 
+	"BOARDWRITEDATE" DATE DEFAULT sysdate, 
+	"MEMBER_ID" VARCHAR2(50 BYTE)
+   );
+   
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (1,'공지테스트1','안녕하세요',to_date('23/02/25','RR/MM/DD'),'admin');
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (2,'공지테스트2','안녕하세요',to_date('23/02/25','RR/MM/DD'),'admin');
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (4,'공지테스트4','안녕하세요',to_date('23/02/25','RR/MM/DD'),'admin');
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (5,'공지테스트5','안녕하세요',to_date('23/02/25','RR/MM/DD'),'admin');
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (6,'공지테스트6','안녕하세요',to_date('23/02/25','RR/MM/DD'),'admin');
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (7,'공지사항테스트1111','안녕하세요?',to_date('23/03/07','RR/MM/DD'),'admin');
+
+  CREATE UNIQUE INDEX "SYS_C007756" ON "NOTICEBOARD" ("BOARDNO");
+  ALTER TABLE "NOTICEBOARD" ADD PRIMARY KEY ("BOARDNO") ENABLE;
+  ALTER TABLE "NOTICEBOARD" MODIFY ("MEMBER_ID" NOT NULL ENABLE);
+  ALTER TABLE "NOTICEBOARD" MODIFY ("BOARDCONTENT" NOT NULL ENABLE);
+  ALTER TABLE "NOTICEBOARD" MODIFY ("BOARDTITLE" NOT NULL ENABLE);
+
+CREATE TABLE "ONELINEREVIEW" 
+   (	"ONELINEREVIEWNO" NUMBER, 
+	"MOVIE_ID" NUMBER, 
+	"ID" VARCHAR2(50 BYTE), 
+	"CONTENT" VARCHAR2(100 BYTE)
+   );
+   
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (1,6,'123','123');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (2,6,'4545','4545');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (3,6,'안중근짱','재밌어요~');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (4,6,'안중근짱짱','재밌어요~~');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (5,11,'번개의호흡1장','벽력일섬!');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (6,6,'영웅재밌어요','재밌어요~~~');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (7,6,'영웅재밌어요11','123123');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (8,8,'paik','hjkhk');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (9,7,'paik','감동감동~');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (10,14,'닭?','토끼?');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (11,11,'번개의호흡1장','재밌어요~');
+Insert into ONELINEREVIEW (ONELINEREVIEWNO,MOVIE_ID,ID,CONTENT) values (12,5,'황정민멋있다','멋있어요~');
+
+  CREATE UNIQUE INDEX "SYS_C007848" ON "ONELINEREVIEW" ("ONELINEREVIEWNO");
+  ALTER TABLE "ONELINEREVIEW" ADD PRIMARY KEY ("ONELINEREVIEWNO") ENABLE;
+
+CREATE TABLE "REVIEW_DETAIL_IMAGE" 
+   (	"IMAGE_ID" NUMBER(20,0), 
+	"BOARDNO" NUMBER(20,0), 
+	"FILENAME" VARCHAR2(50 BYTE), 
+	"FILETYPE" VARCHAR2(40 BYTE), 
+	"CREDATE" DATE DEFAULT SYSDATE, 
+	"REG_ID" VARCHAR2(50 BYTE)
+   );
+   
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (402,7,'calendar.png','main_image',to_date('23/02/28','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (403,8,'computer-networks.png','main_image',to_date('23/02/28','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (404,9,'calendar.png','main_image',to_date('23/02/28','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (405,10,'슬램덩크2.jpg','main_image',to_date('23/02/28','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (406,18,'슬램덩크2.jpg','main_image',to_date('23/02/28','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (407,18,'슬램덩크3.jpg','detail_image1',to_date('23/02/28','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (408,18,'슬램덩크2.jpg','main_image',to_date('23/03/01','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (409,18,'슬램덩크3.jpg','detail_image1',to_date('23/03/01','RR/MM/DD'),'paik');
+Insert into REVIEW_DETAIL_IMAGE (IMAGE_ID,BOARDNO,FILENAME,FILETYPE,CREDATE,REG_ID) values (410,18,'spiderman2.jpg','detail_image2',to_date('23/03/01','RR/MM/DD'),'paik');
+
+CREATE TABLE "REVIEWBOARD" 
+   (	"BOARDNO" NUMBER DEFAULT NULL, 
+	"BOARDTITLE" VARCHAR2(200 BYTE), 
+	"BOARDCONTENT" VARCHAR2(4000 BYTE), 
+	"BOARDWRITEDATE" DATE DEFAULT sysdate, 
+	"MEMBER_ID" VARCHAR2(50 BYTE), 
+	"BOARDVIEW" NUMBER DEFAULT 0, 
+	"BOARDPUSH" NUMBER DEFAULT 0, 
+	"STARPOINT" NUMBER DEFAULT 0, 
+	"MOVIE_ID" NUMBER
+   );
+
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (2,'[대외비]대외비 리뷰','재밌어요~~',to_date('23/03/02','RR/MM/DD'),'admin',87,2,10,8);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (1,'[더 퍼스트 슬램덩크]슬램덩크 리뷰','너무재밌어요~~',to_date('23/03/01','RR/MM/DD'),'paik',14,1,10,2);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (3,'[귀멸의 칼날-상현집결, 그리고 도공 마을로]귀멸의칼날 리뷰','재밌어요~~',to_date('23/03/06','RR/MM/DD'),'admin',4,0,9,11);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (4,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (5,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (6,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (7,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (8,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (9,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (10,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (11,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (12,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (13,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (14,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (15,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (16,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (17,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (18,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (19,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (20,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (21,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (22,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (23,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (24,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (25,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (26,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (27,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (28,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (29,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (30,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (31,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (32,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (33,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (34,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (35,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (36,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (37,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (38,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (39,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (40,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (41,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (42,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (43,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (44,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (45,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (46,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (47,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (48,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (49,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (50,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (51,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (52,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (53,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (54,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (55,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (56,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (57,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (58,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (59,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (60,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (61,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (62,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (63,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (64,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (65,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (66,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (67,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (68,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (69,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (70,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (71,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (72,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (73,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (74,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (75,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (76,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (77,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (78,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (79,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (80,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (81,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (82,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (83,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (84,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (85,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (86,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (87,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (88,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (89,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (90,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (91,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (92,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (93,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (94,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (95,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (96,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (97,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (98,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (99,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (100,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (101,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (102,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (103,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (104,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (105,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (106,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (107,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (108,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (109,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (110,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (111,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (112,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (113,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (114,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (115,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (116,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (117,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (118,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (119,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (120,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (121,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (122,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (123,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (124,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (125,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (126,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (127,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (128,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (129,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (130,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (131,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (132,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (133,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (134,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (135,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (136,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (137,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (138,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (139,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (140,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (141,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (142,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (143,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (144,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (145,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (146,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (147,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (148,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (149,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (150,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (151,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (152,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (153,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (154,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (155,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (156,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (157,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (158,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (159,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (160,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (161,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (162,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (163,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (164,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (165,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (166,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',1,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (167,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (168,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (169,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (170,'더미데이터','더미내용',to_date('23/03/08','RR/MM/DD'),'paik',0,0,0,1);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (171,'[귀멸의 칼날-상현집결, 그리고 도공 마을로]귀멸의칼날 리뷰','1234',to_date('23/03/08','RR/MM/DD'),'admin',4,2,10,11);
+Insert into REVIEWBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID,BOARDVIEW,BOARDPUSH,STARPOINT,MOVIE_ID) values (172,'[영웅]1234','12134',to_date('23/03/08','RR/MM/DD'),'admin',9,0,10,6);
+
+  CREATE UNIQUE INDEX "SYS_C007764" ON "REVIEWBOARD" ("BOARDNO");
+
+  ALTER TABLE "REVIEWBOARD" ADD PRIMARY KEY ("BOARDNO") ENABLE;
+  ALTER TABLE "REVIEWBOARD" MODIFY ("MEMBER_ID" NOT NULL ENABLE);
+  ALTER TABLE "REVIEWBOARD" MODIFY ("BOARDCONTENT" NOT NULL ENABLE);
+  ALTER TABLE "REVIEWBOARD" MODIFY ("BOARDTITLE" NOT NULL ENABLE);
+  
+  Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (1,'[[기타]] 개인정보처리방침 개정 안내 ','보고가슈를 이용해 주시는 회원 여러분께 깊이 감사드립니다. 2023년 1월 16일 자로 보고가슈의 개인정보처리방침이
+개정됨에 따라 회원님께 주요 개정 내용과 적용 일정을 아래와 같이 안내 드립니다.
+이용에 참고하시기 바랍니다.',to_date('23/02/25','RR/MM/DD'),'admin');
+
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (2,'[[시스템점검]] 2023년 3월 시스템 점검 안내','안녕하십니까, CGV입니다.
+
+원활하고 안정된 서비스 제공을 위하여 2023년 2월 새벽 시스템 점검 작업이 예정되어 있습니다.   
+
+점검 시간 중 CGV홈페이지 및 모바일의 모든 서비스가 중단될 예정이오니 이용에 불편 없으시기 바랍니다.',to_date('23/02/25','RR/MM/DD'),'admin');
+
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (4,'[[지점]] 임시 휴점 안내','보고가슈가 23년 2월 8일 부로
+전산 시스템 개편과 관람환경 개선 작업 진행으로 임시 휴점하오니 이용에 참고 부탁드립니다. ',to_date('23/02/25','RR/MM/DD'),'admin');
+
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (5,'[[결제]] 승인시스템 서비스 제한 안내(2/19)','삼성카드 승인시스템 개선 작업으로 승인시스템 서비스가 중단될 예정입니다.
+개선 작업이 진행되는 동안 삼성카드 사용이 어려운 부분에 대해 양해 부탁드리겠습니다.',to_date('23/02/25','RR/MM/DD'),'admin');
+
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (6,'[[요금안내]] 관람 요금 인하 안내','2023년 3월 15일(수)부터 일산 지점 주중(월~목) 요금이
+아래와 같이 인하될 예정이오니 지점 이용에 참고 부탁드립니다.',to_date('23/02/25','RR/MM/DD'),'admin');
+
+Insert into NOTICEBOARD (BOARDNO,BOARDTITLE,BOARDCONTENT,BOARDWRITEDATE,MEMBER_ID) values (7,'[[시스템 장애 복구 안내]]','안녕하십니까. 롯데시네마 입니다.
+
+1월 22일 홈페이지 및 App의 시스템 상태가 불안정하여 장애가 발생한 부분에 대해 사과드립니다.
+
+현재 복구되어 정상적으로 서비스 이용이 가능합니다.',to_date('23/03/07','RR/MM/DD'),'admin');
