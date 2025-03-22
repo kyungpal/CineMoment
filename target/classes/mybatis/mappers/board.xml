@@ -185,7 +185,27 @@
 						   #{item.reg_id}
 						  )
 		</foreach>
-	</insert> 
+	</insert>
+	 
+		<update id="updateMovieImageFile" parameterType="map">
+    <foreach item="item" collection="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+        INTO REVIEW_DETAIL_IMAGE (
+            image_id,
+            boardNO,
+            fileName,
+            fileType,
+            reg_id
+        )
+        VALUES (
+            #{item.image_id},
+            #{item.boardNO},
+            #{item.fileName},
+            #{item.fileType},
+            #{item.reg_id}
+        )
+    </foreach>
+</update>
+	
 	
 	<insert id="insertEventImageFile" parameterType="java.util.Map">
 		<foreach item="item"  collection="list"   open="INSERT ALL" 

@@ -1,6 +1,7 @@
 package com.project.movie.board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,7 +95,22 @@ public class BoardDAOImpl implements BoardDAO {
 		List<BoardVO> selectReviewList = sqlSession.selectList("mapper.board.selectreviewList", member_id);
 		return selectReviewList;
 	}
-
+	
+	@Override
+	public void updateMovieImageFile(Map boardMap) throws DataAccessException {
+	    List<ImageFileVO> imageFileList = (List<ImageFileVO>) boardMap.get("imageFileList");
+	    int boardNO = (Integer) boardMap.get("boardNO");
+	    if (imageFileList != null && !imageFileList.isEmpty()) {
+	        for (ImageFileVO imageFileVO : imageFileList) {
+	            imageFileVO.setBoardNO(boardNO);
+	        }
+	        // MyBatis에 List를 넘길 때, Map에 담아서 전달해야 함
+	        Map<String, Object> paramMap = new HashMap<>();
+	        paramMap.put("list", imageFileList);
+	        sqlSession.update("mapper.board.updateMovieImageFile", paramMap);
+	    }
+	}
+	
 	@Override
 	public void insertReviewImageFile(Map boardMap) throws DataAccessException {
 		List<ImageFileVO> imageFileList = (ArrayList) boardMap.get("imageFileList");

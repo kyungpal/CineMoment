@@ -126,14 +126,14 @@ public class BoardController extends BaseController {
 	public ModelAndView reviewView(@RequestParam("reviewBoardNO") int reviewBoardNO, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("reviewBoardNO : " + reviewBoardNO);
-
 		String viewName = (String) request.getAttribute("viewName");
 		Map boardMap = boardService.reviewView(reviewBoardNO);
 		boardService.boardView(reviewBoardNO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("boardMap", boardMap);
+		System.out.println("reviewBoardNO : " + reviewBoardNO);
+		System.out.println("현재 정보 :" + boardMap);
 		return mav;
 	}
 
@@ -159,17 +159,18 @@ public class BoardController extends BaseController {
 		HttpSession session = multipartRequest.getSession();
 		memberVO = (MemberVO) session.getAttribute("member");
 		String member_id = memberVO.getMember_id();
-		boardMap.put("member_id", member_id);
 
 		String movie_title = (String) boardMap.get("movie_title");
 		int movie_id = orderService.findMovieId(movie_title);
 		System.out.println("movie_id:" + movie_id);
 		String boardTitle1 = (String) boardMap.get("boardTitle");
 		String boardTitle = "[" + movie_title + "]" + boardTitle1;
+		boardMap.put("member_id", member_id);
 		boardMap.put("boardTitle", boardTitle);
 		boardMap.put("movie_id", movie_id);
 		String reg_id = memberVO.getMember_id();
 
+	
 		List<ImageFileVO> imageFileList = upload(multipartRequest);
 		if (imageFileList != null && imageFileList.size() != 0) {
 			for (ImageFileVO imageFileVO : imageFileList) {
@@ -196,7 +197,7 @@ public class BoardController extends BaseController {
 			}
 
 			msg = "<script>";
-			msg += " alert('������ �߰��߽��ϴ�.');";
+			msg += " alert('글 작성 완료.');";
 			msg += " location.href = '" + multipartRequest.getContextPath() + "/board/review.do';";
 			msg += " </script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
@@ -210,7 +211,7 @@ public class BoardController extends BaseController {
 				}
 			}
 			msg = " <script>";
-			msg += " alert('������ �߻��߽��ϴ�. �ٽ� �õ��� �ּ���');";
+			msg += " alert('글작성 실패');";
 			msg += " location.href='" + multipartRequest.getContextPath() + "/board/reviewForm.do'; ";
 			msg += " </script>";
 
@@ -405,13 +406,13 @@ public class BoardController extends BaseController {
 			int movie_id = boardService.addNotice(boardMap);
 
 			message = "<script>";
-			message += " alert('������ �߰��߽��ϴ�..');";
+			message += " alert('글작성완료');";
 			message += " location.href='" + request.getContextPath() + "/board/notice.do';";
 			message += "</script>";
 		} catch (Exception e) {
 
 			message = "<script>";
-			message += " alert('������ �߻��߽��ϴ�. �ٽ� �õ��� �ּ���');";
+			message += " alert('글작성실패');";
 			message += " location.href='" + request.getContextPath() + "/board/noticeForm.do';";
 			message += "</script>";
 			e.printStackTrace();
@@ -419,7 +420,6 @@ public class BoardController extends BaseController {
 		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
-	
 	
 	@ResponseBody
 	@RequestMapping(value = "/reviewMod.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -429,15 +429,13 @@ public class BoardController extends BaseController {
 	    multipartRequest.setCharacterEncoding("utf-8");
 	    response.setContentType("text/html; charset=UTF-8");
 	    Map<String, Object> boardMap = new HashMap<String, Object>();
-	    String imageFileName = null;
+	    String imageFileName = "";
 	    Enumeration enu = multipartRequest.getParameterNames();
 
 	    while (enu.hasMoreElements()) {
 	        String name = (String) enu.nextElement();
 	        String value = multipartRequest.getParameter(name);
-	        
-	        System.out.println("Parameter Name: " + name + " Value: " + value);
-	        
+	        System.out.println("파라미터 Name: " + name + " 값: " + value);
 	        boardMap.put(name, value);
 	    }
 
@@ -448,19 +446,24 @@ public class BoardController extends BaseController {
 
 	    // 글 ID 가져오기
 	    int boardNO = Integer.parseInt((String) boardMap.get("boardNO"));
-
+	    System.out.println("보드넘버 갖고옴?" + boardNO);
+	    
 	    String movie_title = (String) boardMap.get("movie_title");
 	    String boardTitle1 = (String) boardMap.get("boardTitle");
 	    String boardTitle = boardTitle1;
 	    boardMap.put("boardTitle", boardTitle);
-
+	    boardMap.put("boardNO", boardNO);
+//	    System.out.println("boardMap 내용물: " + boardMap);
 	    
 	    List<ImageFileVO> imageFileList = upload(multipartRequest);
 	    if (imageFileList != null && !imageFileList.isEmpty()) {
 	        for (ImageFileVO imageFileVO : imageFileList) {
+//	        	imageFileVO.setBoardNO(boardNO); // imageFileList에 보드NO 담기 
 	            imageFileVO.setReg_id(member_id);
 	        }
 	        boardMap.put("imageFileList", imageFileList);
+	        System.out.println("올라간 이미지 : " + imageFileList);
+	        System.out.println("boardMap 내용물: " + boardMap);
 	    }
 
 	    String msg;
@@ -469,19 +472,19 @@ public class BoardController extends BaseController {
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 	    try {
-	        boardService.modifyReview(boardMap);
-
+	    	boardService.modifyReview(boardMap);
+	    	
 	        if (imageFileList != null && !imageFileList.isEmpty()) {
 	            for (ImageFileVO imageFileVO : imageFileList) {
+	            	
 	                imageFileName = imageFileVO.getFileName();
 	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
 	                File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO);
 	                FileUtils.moveFileToDirectory(srcFile, destDir, true);
+	                System.out.println("업로드된 이미지 : " + imageFileVO.getFileName());
+	                System.out.println("boardMap 내용물: " + boardMap);
 	            }
 	        }
-	        
-	        
-	        
 	        msg = "<script>";
 	        msg += " alert('글 수정이 완료되었습니다.');";
 	        msg += " location.href = '" + multipartRequest.getContextPath() + "/board/review.do';";
@@ -507,6 +510,94 @@ public class BoardController extends BaseController {
 	    return resEnt;
 	}
 	
+	
+//	@ResponseBody
+//	@RequestMapping(value = "/reviewMod.do", method = {RequestMethod.GET, RequestMethod.POST})
+//	public ResponseEntity reviewMod(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+//	        throws Exception {
+//		
+//	    multipartRequest.setCharacterEncoding("utf-8");
+//	    response.setContentType("text/html; charset=UTF-8");
+//	    Map<String, Object> boardMap = new HashMap<String, Object>();
+//	    String imageFileName = "";
+//	    Enumeration enu = multipartRequest.getParameterNames();
+//
+//	    while (enu.hasMoreElements()) {
+//	        String name = (String) enu.nextElement();
+//	        String value = multipartRequest.getParameter(name);
+//	        
+//	        System.out.println("Parameter Name: " + name + " Value: " + value);
+//	        
+//	        boardMap.put(name, value);
+//	    }
+//
+//	    HttpSession session = multipartRequest.getSession();
+//	    memberVO = (MemberVO) session.getAttribute("member");
+//	    String member_id = memberVO.getMember_id();
+//	    boardMap.put("member_id", member_id);
+//
+//	    // 글 ID 가져오기
+//	    int boardNO = Integer.parseInt((String) boardMap.get("boardNO"));
+//
+//	    String movie_title = (String) boardMap.get("movie_title");
+//	    String boardTitle1 = (String) boardMap.get("boardTitle");
+//	    String boardTitle = boardTitle1;
+//	    boardMap.put("boardTitle", boardTitle);
+//
+//	    
+//	    List<ImageFileVO> imageFileList = upload(multipartRequest);
+//
+//	    if (imageFileList != null && !imageFileList.isEmpty()) {
+//	        for (ImageFileVO imageFileVO : imageFileList) {
+//	            imageFileVO.setReg_id(member_id);
+//	        }
+//	        boardMap.put("imageFileList", imageFileList);
+//	        System.out.println("올라간 이미지 : " + imageFileList);
+//	    }
+//
+//	    String msg;
+//	    ResponseEntity resEnt = null;
+//	    HttpHeaders responseHeaders = new HttpHeaders();
+//	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+//
+//	    try {
+//	        boardService.modifyReview(boardMap);
+//
+//	        if (imageFileList != null && !imageFileList.isEmpty()) {
+//	            for (ImageFileVO imageFileVO : imageFileList) {
+//	                imageFileName = imageFileVO.getFileName();
+//	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
+//	                File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO);
+//	                FileUtils.moveFileToDirectory(srcFile, destDir, true);
+//	                System.out.println("업로드된 이미지 : " + imageFileVO.getFileName());
+//
+//	            }
+//	        }
+//	        msg = "<script>";
+//	        msg += " alert('글 수정이 완료되었습니다.');";
+//	        msg += " location.href = '" + multipartRequest.getContextPath() + "/board/review.do';";
+//	        msg += " </script>";
+//	        resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.OK);
+//
+//	    } catch (Exception e) {
+//	        if (imageFileList != null && !imageFileList.isEmpty()) {
+//	            for (ImageFileVO imageFileVO : imageFileList) {
+//	                imageFileName = imageFileVO.getFileName();
+//	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
+//	                srcFile.delete();
+//	            }
+//	        }
+//	        msg = "<script>";
+//	        msg += " alert('글 수정 실패');";
+//	        msg += " location.href='" + multipartRequest.getContextPath() + "/board/reviewForm.do'; ";
+//	        msg += " </script>";
+//
+//	        resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
+//	        e.printStackTrace();
+//	    }
+//	    return resEnt;
+//	}
+//	
 	@RequestMapping(value = "/reviewModForm.do", method = RequestMethod.GET)
 	public ModelAndView reviewModForm(@RequestParam(value = "boardNO", required = false) String boardNOStr) throws Exception {
 	    ModelAndView mav = new ModelAndView();

@@ -29,6 +29,8 @@ public interface BoardDAO {
 
 	public void boardView(int reviewBoardNO) throws DataAccessException;
 
+	public void updateMovieImageFile(Map boardMap)throws DataAccessException;
+	
 	public void insertReviewImageFile(Map boardMap) throws DataAccessException;
 
 	public void insertEventImageFile(Map boardMap) throws DataAccessException;

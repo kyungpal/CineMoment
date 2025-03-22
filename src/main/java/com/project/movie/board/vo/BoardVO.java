@@ -16,6 +16,13 @@ public class BoardVO {
 	private int boardPush;
 	private int starpoint;
 	private int movie_id;
+	
+	@Override
+	public String toString() {
+		return "BoardVO [boardNO=" + boardNO + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", boardWriteDate=" + boardWriteDate + ", member_id=" + member_id + ", boardView=" + boardView
+				+ ", boardPush=" + boardPush + ", starpoint=" + starpoint + ", movie_id=" + movie_id + "]";
+	}
 
 	public String getMember_id() {
 		return member_id;

@@ -71,6 +71,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int addReview(Map boardMap) throws Exception {
+		
 		int boardNO = boardDAO.addReview(boardMap);
 		boardMap.put("boardNO", boardNO);
 		boardDAO.insertReviewImageFile(boardMap);
@@ -80,6 +81,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void modifyReview(Map<String, Object> boardMap) throws Exception {
 	    boardDAO.modifyReview(boardMap);
+	    boardDAO.updateMovieImageFile(boardMap);
+	    
 	}
 	@Override
 	public void boardPush(int reviewBoardNO) throws Exception {
