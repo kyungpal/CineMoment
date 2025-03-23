@@ -62,6 +62,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public String getCurrentFileName(int boardNO)throws DataAccessException {
+        return sqlSession.selectOne("mapper.board.getCurrentFileName", boardNO);
+    }
+	
+	@Override
 	public int addReview(Map boardMap) throws DataAccessException {
 		int boardNO = NewBoardNO();
 		System.out.println("boardNO :" + boardNO);
@@ -100,8 +105,10 @@ public class BoardDAOImpl implements BoardDAO {
 	public void updateMovieImageFile(Map boardMap) throws DataAccessException {
 	    List<ImageFileVO> imageFileList = (List<ImageFileVO>) boardMap.get("imageFileList");
 	    int boardNO = (Integer) boardMap.get("boardNO");
+	    int image_id = selectNewImageFileNO();
 	    if (imageFileList != null && !imageFileList.isEmpty()) {
 	        for (ImageFileVO imageFileVO : imageFileList) {
+	        	imageFileVO.setImage_id(++image_id);
 	            imageFileVO.setBoardNO(boardNO);
 	        }
 	        // MyBatis에 List를 넘길 때, Map에 담아서 전달해야 함

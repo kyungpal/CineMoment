@@ -295,7 +295,7 @@ public class BoardController extends BaseController {
 			}
 
 			message = "<script>";
-			message += " alert('���� �����߽��ϴ�.');";
+			message += " alert('글삭제 완료');";
 			message += " location.href='" + request.getContextPath() + "/board/review.do';";
 			message += " </script>";
 
@@ -304,7 +304,7 @@ public class BoardController extends BaseController {
 		} catch (Exception e) {
 
 			message = "<script>";
-			message += " alert('�۾��� ������ �߻��߽��ϴ�.�ٽ� �õ��� �ּ���.');";
+			message += " alert('글 삭제 실패');";
 			message += " location.href='" + request.getContextPath() + "/board/review.do';";
 			message += " </script>";
 
@@ -472,19 +472,37 @@ public class BoardController extends BaseController {
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 	    try {
-	    	boardService.modifyReview(boardMap);
-	    	
+	    	if (imageFileList == null || imageFileList.isEmpty()) {
+	            // 기존 이미지 정보 가져오기
+	            String currentFileName = boardService.getCurrentFileName(boardNO);
+	            boardMap.put("fileName", currentFileName); // 기존 이미지 유지
+	    	}
+	            boardService.modifyReview(boardMap);
+	            
 	        if (imageFileList != null && !imageFileList.isEmpty()) {
 	            for (ImageFileVO imageFileVO : imageFileList) {
 	            	
 	                imageFileName = imageFileVO.getFileName();
+	                
+	                if (imageFileName == null || imageFileName.trim().isEmpty()) {
+	                    System.out.println("❌ 이미지 파일명이 NULL 또는 빈 값입니다.");
+	                    continue; // 파일명이 없으면 건너뛰기
+	                }
+	                
 	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
 	                File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO);
+	                
+	                if (!srcFile.exists()) {
+	                    System.out.println("❌ 파일이 존재하지 않음: " + srcFile.getAbsolutePath());
+	                    continue;
+	                }
+	                
 	                FileUtils.moveFileToDirectory(srcFile, destDir, true);
-	                System.out.println("업로드된 이미지 : " + imageFileVO.getFileName());
-	                System.out.println("boardMap 내용물: " + boardMap);
+	                System.out.println("업로드된 이미지 : " + imageFileName);
 	            }
 	        }
+	        System.out.println("boardMap 내용물: " + boardMap);
+	        
 	        msg = "<script>";
 	        msg += " alert('글 수정이 완료되었습니다.');";
 	        msg += " location.href = '" + multipartRequest.getContextPath() + "/board/review.do';";

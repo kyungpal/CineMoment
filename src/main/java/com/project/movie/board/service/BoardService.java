@@ -23,6 +23,8 @@ public interface BoardService {
 
 	public int addReview(Map boardMap) throws Exception;
 
+	public String getCurrentFileName(int boardNO) throws Exception;
+	
 	public void boardPush(int reviewBoardNO) throws Exception;
 
 	public void boardView(int reviewBoardNO) throws Exception;

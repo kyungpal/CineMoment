@@ -80,6 +80,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void modifyReview(Map<String, Object> boardMap) throws Exception {
+		Integer boardNO = (Integer) boardMap.get("boardNO");
 	    boardDAO.modifyReview(boardMap);
 	    boardDAO.updateMovieImageFile(boardMap);
 	    
@@ -144,4 +145,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardNO;
 	}
 
+	@Override
+	 public String getCurrentFileName(int boardNO) {
+        return boardDAO.getCurrentFileName(boardNO);
+    }
+	
 }

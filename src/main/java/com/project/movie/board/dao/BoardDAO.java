@@ -60,4 +60,6 @@ public interface BoardDAO {
 	public int selectTotalReview() throws DataAccessException;
 	
 	public void modifyReview(Map<String, Object> boardMap) throws DataAccessException;
+	
+	public String getCurrentFileName(int boardNO)throws DataAccessException; 
 }

@@ -168,6 +168,12 @@
 		]]>
 	</select>
 	
+	
+	<select id="getCurrentFileName" resultType="string">
+    SELECT fileName 
+    FROM REVIEW_DETAIL_IMAGE 
+    WHERE boardNO = #{boardNO}
+		</select>
 		
 		<insert id="insertMovieImageFile" parameterType="java.util.Map">
 		<foreach item="item"  collection="list"   open="INSERT ALL" 
@@ -187,12 +193,14 @@
 		</foreach>
 	</insert>
 	 
-<update id="updateMovieImageFile" parameterType="map">
-    <foreach item="item" collection="list" separator=";">
+			<update id="updateMovieImageFile" parameterType="map">
+    <foreach item="item" collection="list">
         UPDATE REVIEW_DETAIL_IMAGE
         SET 
-            fileName = #{item.fileName}
-        WHERE boardNO = #{item.boardNO} 
+            <if test="item.fileName != null and item.fileName != ''">
+                fileName = #{item.fileName}
+            </if>
+        WHERE boardNO = #{item.boardNO}
     </foreach>
 </update>
 
