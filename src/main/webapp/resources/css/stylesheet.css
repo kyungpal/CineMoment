@@ -130,31 +130,37 @@ li a {
 /* ���̾ƿ� */
 
 /* �˻�â */
+header {
+    position: relative; /* 자식 요소의 절대 위치를 설정하기 위한 기준이 됩니다 */
+}
+
 .search {
-	position: relative;
-	/*width: 300px;*/
-	display: inline-block;
-	padding: 6px;
+    position: absolute;
+    right: 20px; /* 오른쪽 여백 */
+    top: 170px; /* 하단 여백 */
+    display: flex;
+    align-items: center;
 }
 
-.input {
-	width: 100%;
-	border: 1px solid #bbb;
-	border-radius: 8px;
-	padding: 10px 12px;
-	font-size: 14px;
-	font-family: 'GongGothicMedium';
+.search input[type="text"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-.img {
+.search input[type="image"] {
 	position: absolute;
 	width: 17px;
-	top: 10px;
-	right: 12px;
+	bottom: 5px;
+	right: 5px;
 	margin: 0;
-	padding: 6px;
+	padding: 4px;   
+	margin-left: 10px;
+	cursor: pointer;
 }
-/* �˻�â */
+
+
 
 /* ���������� */
 .list_view {
@@ -546,18 +552,17 @@ footer .familysite_wrap .btn_familysite {
 
 .effect5 {
 	position: relative;
-	max-width: 220px;
+	max-width: 230px;
 	height: 310px;
 	background: #000;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 	margin: 0px 10px 0px 10px;
-	width: 220px;
-	height: 310px;
+	width: 230px;
 	border-radius: 10px;
 }
 
 .effect5 img {
-	width: 220px;
+	width: 230px;
 	height: 310px;
 }
 
@@ -614,19 +619,18 @@ footer .familysite_wrap .btn_familysite {
 }
 
 .effect51 {
-	position: relative;
-	max-width: 220px;
+position: relative;
+	max-width: 230px;
 	height: 310px;
 	background: #000;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-	margin: 0px 20px 0px 20px;
-	width: 220px;
-	height: 310px;
+	margin: 0px 10px 0px 10px;
+	width: 230px;
 	border-radius: 10px;
 }
 
 .effect51 img {
-	width: 220px;
+	width: 230px;
 	height: 310px;
 }
 
@@ -689,17 +693,19 @@ footer .familysite_wrap .btn_familysite {
 }
 
 .myButton {
-	background-color: #ffffff;
+	background-color: #037B94;
 	display: inline-block;
 	cursor: pointer;
-	color: #010708;
+	color: #FFFFFF;
 	font-family: 'GongGothicMedium';
-	font-size: 12px;
+	font-size: 18px;
 	padding: 1px 25px;
 	text-decoration: none;
-	margin: 4px 4px 4px 4px;
-	width: 50px;
-	border-radius: 10px;
+	width: auto;
+	heigh: auto;
+	white-space: nowrap;
+	border-radius: 5px;
+	margin-top: 10px; 
 }
 
 .myButton:hover {
@@ -716,13 +722,15 @@ footer .familysite_wrap .btn_familysite {
 	display: inline-block;
 	cursor: pointer;
 	color: #ffffff;
-	font-family: ����;
-	font-size: 12px;
+	font-family: 'GongGothicMedium';
+	font-size: 18px;
 	padding: 1px 25px;
 	text-decoration: none;
-	margin: 4px 4px 4px 4px;
-	width: 50px;
-	border-radius: 10px;
+	width: auto;
+	heigh: auto;
+	white-space: nowrap;
+	border-radius: 5px;
+	margin-top: 10px; 
 }
 
 .myButton1:hover {
@@ -837,8 +845,8 @@ footer .familysite_wrap .btn_familysite {
 
 .movieChartBeScreen_btn_wrap {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
 	margin-top: 50px;
 	margin-bottom: 20px;
 }
