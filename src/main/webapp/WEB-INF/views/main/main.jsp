@@ -74,7 +74,7 @@ function fn_form(isLogOn,url, movieNum, movieTitle,loginForm){
 			<div class="movieChartBeScreen_btn_wrap">
 				<div class="tabBtn_wrap">
 					<h3>
-						<a href="#none" class="active" id="btnMovie">현재상영작</a>
+						<a href="#none" class="active" id="btnMovie" >현재상영작</a>
 					</h3>
 					<h3>
 						<a href="#none" id="btnReserMovie" class="active1">상영예정작</a>
@@ -82,48 +82,40 @@ function fn_form(isLogOn,url, movieNum, movieTitle,loginForm){
 				</div>
 			</div>
 			<!-- 현재상영작 -->
-			<div class="effect-wrap">
-				<c:forEach var="titleList" items="${titleList }"
-						   varStatus="titleListNum">
-					<c:if test="${titleList.movie_status == 'y' }">
-						<figure class="effect5">
-							<img
-									src="${contextPath}/thumbnails.do?movie_id=${titleList.movie_id}&fileName=${titleList.movie_filename}"
-									style="border-radius: 10px;">
-							<figcaption>
-								<div style="text-align: center">
-									<a
-											href="${contextPath}/movie/movieDetail.do?movie_id=${titleList.movie_id}"
-											class="myButton">상세보기</a> <a
-										href="javascript:callFunction();"
-										onClick="fn_form('${isLogOn}','${contextPath}/order/timeselect.do', ${titleList.movie_id},'${titleList.movie_title}','${contextPath}/member/loginForm.do')"
-										class="myButton1">예매하기</a>
-								</div>
-							</figcaption>
-						</figure>
-					</c:if>
-
-				</c:forEach>
-			</div>
+		<div class="effect-wrap">
+    <c:forEach var="titleList" items="${titleList}" varStatus="titleListNum">
+        <c:if test="${titleList.movie_status == 'y' }">
+            <figure class="effect5" style="position: relative; display: inline-block;">
+                <img src="${contextPath}/thumbnails.do?movie_id=${titleList.movie_id}&fileName=${titleList.movie_filename}"
+                     style="border-radius: 10px;">
+                <!-- 버튼을 썸네일 하단에 배치 -->
+					<div style="text-align: center; display: flex;">
+                    <a href="${contextPath}/movie/movieDetail.do?movie_id=${titleList.movie_id}" class="myButton">상세보기</a>
+                    <a href="javascript:callFunction();"
+                       onClick="fn_form('${isLogOn}','${contextPath}/order/timeselect.do', ${titleList.movie_id},'${titleList.movie_title}','${contextPath}/member/loginForm.do')"
+                       class="myButton1">예매하기</a>
+                </div>
+            </figure>
+        </c:if>
+    </c:forEach>
+</div>
 			<!-- 상영예정작 -->
 			<div class="effect-wrap">
 				<c:forEach var="titleList" items="${titleList1 }"
 						   varStatus="titleListNum">
 					<c:if test="${titleList.movie_status == 'e' }">
-						<figure class="effect51">
+						 <figure class="effect51" style="position: relative; display: inline-block;">
 							<img alt="HTML5 &amp; CSS3"
 								 src="${contextPath}/thumbnails.do?movie_id=${titleList.movie_id}&fileName=${titleList.movie_filename}"
-								 style="border-radius: 10px;">
-							<figcaption>
-								<div style="text-align: center">
-									<a
-											href="${contextPath}/movie/movieDetail.do?movie_id=${titleList.movie_id}"
+								style="border-radius: 10px; display: block; width: 100%;">
+								  <!-- 버튼을 썸네일 하단에 배치 -->
+								<div style="text-align: center; display: flex; ">
+									<a href="${contextPath}/movie/movieDetail.do?movie_id=${titleList.movie_id}"
 											class="myButton">상세보기</a> <a
 										href="javascript:callFunction();"
 										onClick="fn_form('${isLogOn}','${contextPath}/order/timeselect.do', ${titleList.movie_id},'${titleList.movie_title}','${contextPath}/member/loginForm.do')"
 										class="myButton1">예매하기</a>
 								</div>
-							</figcaption>
 						</figure>
 					</c:if>
 				</c:forEach>
@@ -253,103 +245,5 @@ function fn_form(isLogOn,url, movieNum, movieTitle,loginForm){
 			</section>
 		</div>
 	</div>
-	<%-- <section class="notice">
-        <!-- board list area -->
-        <h3>공지사항</h3>
-        <a href = "${contextPath}/board/notice.do">
-        <p style = "text-align : right; color : gray; font-size : 11px; ">더보기</p>
-        </a>
-          <div id="board-list">
-              <div class="container">
-                  <table class="board-table">
-                      <thead>
-                      <tr>
-                          <th scope="col" class="th-num">번호</th>
-                          <th scope="col" class="th-title">제목</th>
-                          <th scope="col" class="th-date">등록일</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <c:choose>
-                      	<c:when test = "${noticeList == null }">
-                      	<tr height="10">
-      						<td colspan="3">
-         						<p align="center">
-           							 <b><span style="font-size:9pt;">등록된 글이 없습니다.</span></b>
-        						</p>
-      						</td>  
-   					   </tr>
-                      	</c:when>
-                      <c:when test = "${noticeList != null }">
-                      <c:forEach var = "noticeList" items = "${noticeList }" varStatus = "noticeListNum">
-                       <c:if test = "${noticeListNum.count <= 5 }">
-                      <tr>
-                          <td>${noticeListNum.count }</td>
-                          <th>
-                            <a href="${contextPath}/board/noticeView.do?noticeBoardNO=${noticeList.boardNO}">${noticeList.boardTitle }</a>
-                          </th>
-                          <td>${noticeList.boardWriteDate }</td>
-                      </tr>
-                      </c:if>
-					  </c:forEach>
-					  </c:when>
-					  </c:choose>      
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      
-      </section>
-      
-	<section class="notice">
-        <!-- board list area -->
-        <h3>리뷰</h3>
-        <a href = "${contextPath}/board/review.do">
-        <p style = "text-align : right; color : gray; font-size : 11px; ">더보기</p>
-        </a>
-          <div id="board-list">
-              <div class="container">
-                  <table class="board-table">
-                      <thead>
-                      <tr>
-                          <th scope="col" class="th-num">번호</th>
-                          <th scope="col" class="th-title">제목</th>
-                          <th scope="col" class="th-date">등록일</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <c:choose>
-                      	<c:when test = "${reviewList == '[]' }">
-                      	<tr height="10">
-      						<td colspan="3">
-         						<p align="center">
-           							 <b><span style="font-size:9pt;">등록된 글이 없습니다.</span></b>
-        						</p>
-      						</td>  
-   					   </tr>
-                      	</c:when>
-                      <c:when test = "${reviewList != null }">
-                      <c:forEach var = "reviewList" items = "${reviewList }" varStatus = "reviewListNum">
-                       <c:if test = "${reviewListNum.count <= 5 }">
-                      <tr>
-                          <td>${reviewListNum.count }</td>
-                          <th>
-                            <a href="${contextPath}/board/reviewView.do?reviewBoardNO=${reviewList.boardNO}">${reviewList.boardTitle }</a>
-                          </th>
-                          <td>${reviewList.boardWriteDate }</td>
-                      </tr>
-                      </c:if>
-					  </c:forEach>
-					  </c:when>
-					  </c:choose>      
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      
-      </section>
-
-<br> --%>
 
 </body>
-
