@@ -79,9 +79,22 @@
 	<insert id = "addOneLineReview" parameterType = "java.util.Map">
 		<![CDATA[
 		insert into ONELINEREVIEW
-		values(#{oneLineReviewNO},#{movie_id},#{id},#{content},#{parentOneLineReviewNO})
+		values(#{oneLineReviewNO},#{movie_id},#{id},#{password},#{content},#{parentOneLineReviewNO})
 		]]>
 	</insert>
+	
+	<!-- 리뷰의 비밀번호 조회 -->
+	<select id="getReviewPassword" resultType="String">
+        SELECT password
+        FROM ONELINEREVIEW
+        WHERE ONELINEREVIEWNO = #{ONELINEREVIEWNO}
+    </select>
+	
+	<!-- 한줄평 삭제 -->
+    <delete id="deleteOneLineReview" parameterType = "int">
+        DELETE FROM ONELINEREVIEW
+        WHERE ONELINEREVIEWNO = #{ONELINEREVIEWNO}
+    </delete>
 	
 	<select id = "oneLineReviewList" parameterType = "int" resultType = "movieVO">
 		<![CDATA[
