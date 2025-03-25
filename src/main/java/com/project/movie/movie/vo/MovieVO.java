@@ -24,9 +24,18 @@ public class MovieVO {
 	private int starpoint;
 	private int oneLineReviewNO;
 	private String id;
+	private String password;
 	private String content;
 	private int parent_onelinereviewno;
 	private List<MovieVO> list;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public List<MovieVO> getList() {
 		return list;

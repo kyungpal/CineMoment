@@ -52,14 +52,23 @@ public class MovieDAOImpl implements MovieDAO {
 	@Override
 	public List<MovieVO> oneLineReviewList(int movie_id) throws DataAccessException {
 		List<MovieVO> oneLineReviewList = sqlsession.selectList("mapper.movie.oneLineReviewList",movie_id);
-
 //		oneLineReviewList.forEach(movieVO -> {
 //			if(movieVO.getOneLineReviewNO() == movieVO.getParent_onelinereviewno()){
 //
 //			}
 //		});
-
 		return oneLineReviewList;
+	}
+	
+	@Override
+	public String getReviewPassword(Object oneLineReviewNO)throws DataAccessException {
+        return sqlsession.selectOne("mapper.movie.getReviewPassword", oneLineReviewNO);
+    }
+	
+	
+	@Override
+	public void deleteOneLineReview(Object oneLineReviewNO)throws DataAccessException {
+		sqlsession.delete("mapper.movie.deleteOneLineReview",oneLineReviewNO);
 	}
 
 }

@@ -18,4 +18,8 @@ public interface MovieDAO {
 	public void addOneLineReview(Map reviewMap) throws DataAccessException;
 	
 	public List<MovieVO> oneLineReviewList(int movie_id) throws DataAccessException;
+	
+	public void deleteOneLineReview(Object oneLineReviewNO)throws DataAccessException;
+	
+	public String getReviewPassword(Object oneLineReviewNO)throws DataAccessException;
 }

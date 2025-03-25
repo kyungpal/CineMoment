@@ -42,5 +42,19 @@ public class MovieServiceImpl implements MovieService {
 		List<MovieVO> oneLineReviewList = movieDAO.oneLineReviewList(movie_id);
 		return oneLineReviewList;
 	}
+	
+	@Override
+	public boolean deleteOneLineReview(Map<String, Object> reviewMap) {
+        // 1. DB에서 해당 review_id와 비밀번호 가져오기
+        String storedPassword = movieDAO.getReviewPassword(reviewMap.get("oneLineReviewNO"));
 
+        // 2. 입력받은 비밀번호와 비교
+        if (storedPassword != null && storedPassword.equals(reviewMap.get("password"))) {
+            // 3. 비밀번호가 맞으면 삭제
+            movieDAO.deleteOneLineReview(reviewMap.get("oneLineReviewNO"));
+            return true; // 삭제 성공
+        }
+        return false; // 비밀번호 틀림
+    }
 }
+

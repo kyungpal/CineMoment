@@ -35,17 +35,7 @@ public class MovieController {
 	@Autowired
 	private MovieVO movieVO;
 
-	// ���� ��û ��Ʈ�ѷ�
-//	@Override
-//	@RequestMapping(value= "/main/main.do" ,method={RequestMethod.POST,RequestMethod.GET})
-//	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
-//		ModelAndView mav=new ModelAndView();
-//		String viewName=(String)request.getAttribute("viewName");
-//		mav.setViewName(viewName);
-//		return mav;
-//	}
 
-	// ���� ������(��������)�� ���� ��Ʈ�ѷ�
 	@RequestMapping(value = "/movieDetail.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView movieDetail(@RequestParam("movie_id") int movie_id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -99,6 +89,7 @@ public class MovieController {
 	@RequestMapping(value = "/oneLineReview.do", method = RequestMethod.POST)
 	public ResponseEntity oneLineReview(@RequestParam("movie_id") String movie_id,
 										@RequestParam("id") String id,
+										@RequestParam("password") String password,
 										@RequestParam("content") String content,
 										@RequestParam(required = false,value = "parentOneLineReviewNO") String parentOneLineReviewNO,
 										HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -107,7 +98,9 @@ public class MovieController {
         reviewMap.put("parentOneLineReviewNO", parentOneLineReviewNO);
 		reviewMap.put("movie_id", movie_id);
 		reviewMap.put("id", id);
+		reviewMap.put("password", password);
 		reviewMap.put("content", content);
+		
 		movieService.oneLineReview(reviewMap);
 		
 		String message = null;
@@ -117,4 +110,29 @@ public class MovieController {
 		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
+
+	//한줄평삭제 메서드
+	@RequestMapping(value = "/deleteOneLineReview.do", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteOneLineReview(@RequestParam("movie_id") int movie_id,
+	                                                  @RequestParam("oneLineReviewNO") int oneLineReviewNO,
+	                                                  @RequestParam("password") String password,
+	                                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		   	Map<String, Object> reviewMap = new HashMap<>();
+		    reviewMap.put("movie_id", movie_id);
+		    reviewMap.put("oneLineReviewNO", oneLineReviewNO);
+		    reviewMap.put("password", password);	
+		    
+		    boolean isDeleted = movieService.deleteOneLineReview(reviewMap);
+
+		    // 삭제 성공 여부에 따라 응답 메시지 설정
+		    String message = isDeleted ? "success" : "wrong_password";
+
+		    return new ResponseEntity<>(message, HttpStatus.OK);
+		
+	}
 }
+
+	
+	
+	

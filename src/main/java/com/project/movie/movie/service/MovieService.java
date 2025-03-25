@@ -16,4 +16,6 @@ public interface MovieService {
 	public void oneLineReview(Map reviewMap) throws Exception;
 	
 	public List<MovieVO> oneLineReviewList(int movie_id) throws Exception;
+	
+	public boolean deleteOneLineReview(Map<String, Object> reviewMap) throws Exception;
 }
