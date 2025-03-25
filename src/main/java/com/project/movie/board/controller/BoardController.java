@@ -245,7 +245,7 @@ public class BoardController extends BaseController {
 			boardService.boardPush(reviewBoardNO);
 
 			msg = "<script>";
-			msg += " alert('��õ�� �Ϸ��߽��ϴ�..');";
+			msg += " alert('추천하였습니다.');";
 			msg += " location.href = '" + request.getContextPath() + "/board/reviewView.do?reviewBoardNO="
 					+ reviewBoardNO + "';";
 			msg += " </script>";
@@ -275,9 +275,7 @@ public class BoardController extends BaseController {
 		String message;
 		String fileName;
 		ResponseEntity resEnt = null;
-
 		HttpHeaders responseHeaders = new HttpHeaders();
-
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 		try {
@@ -291,14 +289,11 @@ public class BoardController extends BaseController {
 					File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO + "\\" + fileName);
 					destDir.delete();
 				}
-
 			}
-
 			message = "<script>";
-			message += " alert('글삭제 완료');";
+			message += " alert('글 삭제 완료');";
 			message += " location.href='" + request.getContextPath() + "/board/review.do';";
 			message += " </script>";
-
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
 		} catch (Exception e) {
@@ -335,7 +330,6 @@ public class BoardController extends BaseController {
 		}
 
 		HttpSession session = multipartRequest.getSession();
-
 		List<ImageFileVO> imageFileList = upload(multipartRequest);
 		boardMap.put("imageFileList", imageFileList);
 
@@ -365,7 +359,6 @@ public class BoardController extends BaseController {
 					srcFile.delete();
 				}
 			}
-
 			message = "<script>";
 			message += " alert('������ �߻��߽��ϴ�. �ٽ� �õ��� �ּ���');";
 			message += " location.href='" + multipartRequest.getContextPath() + "/board/eventForm.do';";
@@ -453,7 +446,6 @@ public class BoardController extends BaseController {
 	    String boardTitle = boardTitle1;
 	    boardMap.put("boardTitle", boardTitle);
 	    boardMap.put("boardNO", boardNO);
-//	    System.out.println("boardMap 내용물: " + boardMap);
 	    
 	    List<ImageFileVO> imageFileList = upload(multipartRequest);
 	    if (imageFileList != null && !imageFileList.isEmpty()) {
@@ -472,155 +464,79 @@ public class BoardController extends BaseController {
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 	    try {
-	    	if (imageFileList == null || imageFileList.isEmpty()) {
-	            // 기존 이미지 정보 가져오기
-	            String currentFileName = boardService.getCurrentFileName(boardNO);
-	            boardMap.put("fileName", currentFileName); // 기존 이미지 유지
-	    	}
+	        String currentFileName = boardService.getCurrentFileName(boardNO); // 기존 파일명 한 번만 가져오기
+
+	        if (imageFileList == null || imageFileList.isEmpty()) {
+	            // 기존 이미지 유지
+	            boardMap.put("fileName", currentFileName);
+	        } else {
+	            // 기존 이미지 삭제
+	            if (currentFileName != null && !currentFileName.isEmpty()) {
+	                File oldFile = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO + "\\" + currentFileName);
+	                if (oldFile.exists()) {
+	                    oldFile.delete();
+	                    System.out.println("✅ 기존 이미지 삭제: " + currentFileName);
+	                }
+	            }
+	        }
+	     // DB 업데이트 (이미지 삭제 후에 실행)
 	            boardService.modifyReview(boardMap);
 	            
-	        if (imageFileList != null && !imageFileList.isEmpty()) {
-	            for (ImageFileVO imageFileVO : imageFileList) {
-	            	
-	                imageFileName = imageFileVO.getFileName();
-	                
-	                if (imageFileName == null || imageFileName.trim().isEmpty()) {
-	                    System.out.println("❌ 이미지 파일명이 NULL 또는 빈 값입니다.");
-	                    continue; // 파일명이 없으면 건너뛰기
-	                }
-	                
-	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
-	                File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO);
-	                
-	                if (!srcFile.exists()) {
-	                    System.out.println("❌ 파일이 존재하지 않음: " + srcFile.getAbsolutePath());
-	                    continue;
-	                }
-	                
-	                FileUtils.moveFileToDirectory(srcFile, destDir, true);
-	                System.out.println("업로드된 이미지 : " + imageFileName);
-	            }
-	        }
-	        System.out.println("boardMap 내용물: " + boardMap);
-	        
-	        msg = "<script>";
-	        msg += " alert('글 수정이 완료되었습니다.');";
-	        msg += " location.href = '" + multipartRequest.getContextPath() + "/board/review.do';";
-	        msg += " </script>";
-	        resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.OK);
+	         // 새 이미지 이동
+	            if (imageFileList != null && !imageFileList.isEmpty()) {
+	                for (ImageFileVO imageFileVO : imageFileList) {
+	                    imageFileName = imageFileVO.getFileName();
 
-	    } catch (Exception e) {
-	        if (imageFileList != null && !imageFileList.isEmpty()) {
-	            for (ImageFileVO imageFileVO : imageFileList) {
-	                imageFileName = imageFileVO.getFileName();
-	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
-	                srcFile.delete();
-	            }
-	        }
-	        msg = "<script>";
-	        msg += " alert('글 수정 실패');";
-	        msg += " location.href='" + multipartRequest.getContextPath() + "/board/reviewForm.do'; ";
-	        msg += " </script>";
+	                    if (imageFileName == null || imageFileName.trim().isEmpty()) {
+	                        System.out.println("❌ 이미지 파일명이 NULL 또는 빈 값입니다.");
+	                        continue;
+	                    }
 
-	        resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
-	        e.printStackTrace();
-	    }
-	    return resEnt;
+	                    File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
+	                    File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO);
+
+	                    if (!srcFile.exists()) {
+	                        System.out.println("❌ 파일이 존재하지 않음: " + srcFile.getAbsolutePath());
+	                        continue;
+	                    }
+
+	                    FileUtils.moveFileToDirectory(srcFile, destDir, true);
+	                    System.out.println("✅ 업로드된 이미지 : " + imageFileName);
+	                }
+	            }
+
+	            System.out.println("boardMap 내용물: " + boardMap);
+	            msg = "<script>";
+	            msg += " alert('글 수정이 완료되었습니다.');";
+	            msg += " location.href = '" + multipartRequest.getContextPath() + "/board/review.do';";
+	            msg += " </script>";
+	            resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.OK);
+
+	        } catch (Exception e) {
+	            if (imageFileList != null && !imageFileList.isEmpty()) {
+	                for (ImageFileVO imageFileVO : imageFileList) {
+	                    String failedImageFileName = imageFileVO.getFileName();
+	                    File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + failedImageFileName);
+	                    if (srcFile.exists()) {
+	                        srcFile.delete();
+	                    }
+	                }
+	            }
+	            msg = "<script>";
+	            msg += " alert('글 수정 실패');";
+	            msg += " location.href='" + multipartRequest.getContextPath() + "/board/reviewForm.do'; ";
+	            msg += " </script>";
+
+	            resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
+	            e.printStackTrace();
+	        }
+
+	        return resEnt;
 	}
 	
-	
-//	@ResponseBody
-//	@RequestMapping(value = "/reviewMod.do", method = {RequestMethod.GET, RequestMethod.POST})
-//	public ResponseEntity reviewMod(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-//	        throws Exception {
-//		
-//	    multipartRequest.setCharacterEncoding("utf-8");
-//	    response.setContentType("text/html; charset=UTF-8");
-//	    Map<String, Object> boardMap = new HashMap<String, Object>();
-//	    String imageFileName = "";
-//	    Enumeration enu = multipartRequest.getParameterNames();
-//
-//	    while (enu.hasMoreElements()) {
-//	        String name = (String) enu.nextElement();
-//	        String value = multipartRequest.getParameter(name);
-//	        
-//	        System.out.println("Parameter Name: " + name + " Value: " + value);
-//	        
-//	        boardMap.put(name, value);
-//	    }
-//
-//	    HttpSession session = multipartRequest.getSession();
-//	    memberVO = (MemberVO) session.getAttribute("member");
-//	    String member_id = memberVO.getMember_id();
-//	    boardMap.put("member_id", member_id);
-//
-//	    // 글 ID 가져오기
-//	    int boardNO = Integer.parseInt((String) boardMap.get("boardNO"));
-//
-//	    String movie_title = (String) boardMap.get("movie_title");
-//	    String boardTitle1 = (String) boardMap.get("boardTitle");
-//	    String boardTitle = boardTitle1;
-//	    boardMap.put("boardTitle", boardTitle);
-//
-//	    
-//	    List<ImageFileVO> imageFileList = upload(multipartRequest);
-//
-//	    if (imageFileList != null && !imageFileList.isEmpty()) {
-//	        for (ImageFileVO imageFileVO : imageFileList) {
-//	            imageFileVO.setReg_id(member_id);
-//	        }
-//	        boardMap.put("imageFileList", imageFileList);
-//	        System.out.println("올라간 이미지 : " + imageFileList);
-//	    }
-//
-//	    String msg;
-//	    ResponseEntity resEnt = null;
-//	    HttpHeaders responseHeaders = new HttpHeaders();
-//	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-//
-//	    try {
-//	        boardService.modifyReview(boardMap);
-//
-//	        if (imageFileList != null && !imageFileList.isEmpty()) {
-//	            for (ImageFileVO imageFileVO : imageFileList) {
-//	                imageFileName = imageFileVO.getFileName();
-//	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
-//	                File destDir = new File(CURR_IMAGE_REPO_PATH + "\\" + boardNO);
-//	                FileUtils.moveFileToDirectory(srcFile, destDir, true);
-//	                System.out.println("업로드된 이미지 : " + imageFileVO.getFileName());
-//
-//	            }
-//	        }
-//	        msg = "<script>";
-//	        msg += " alert('글 수정이 완료되었습니다.');";
-//	        msg += " location.href = '" + multipartRequest.getContextPath() + "/board/review.do';";
-//	        msg += " </script>";
-//	        resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.OK);
-//
-//	    } catch (Exception e) {
-//	        if (imageFileList != null && !imageFileList.isEmpty()) {
-//	            for (ImageFileVO imageFileVO : imageFileList) {
-//	                imageFileName = imageFileVO.getFileName();
-//	                File srcFile = new File(CURR_IMAGE_REPO_PATH + "\\temp\\" + imageFileName);
-//	                srcFile.delete();
-//	            }
-//	        }
-//	        msg = "<script>";
-//	        msg += " alert('글 수정 실패');";
-//	        msg += " location.href='" + multipartRequest.getContextPath() + "/board/reviewForm.do'; ";
-//	        msg += " </script>";
-//
-//	        resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
-//	        e.printStackTrace();
-//	    }
-//	    return resEnt;
-//	}
-//	
 	@RequestMapping(value = "/reviewModForm.do", method = RequestMethod.GET)
 	public ModelAndView reviewModForm(@RequestParam(value = "boardNO", required = false) String boardNOStr) throws Exception {
 	    ModelAndView mav = new ModelAndView();
-	    
-	    System.out.println("Requested board NO: " + boardNOStr);
 	    
 	    if (boardNOStr == null || boardNOStr.trim().isEmpty()) {
 	        mav.setViewName("redirect:/board/review.do");
@@ -638,8 +554,6 @@ public class BoardController extends BaseController {
 	    }
 
 	    Map<String, Object> review = boardService.reviewView(boardNO);
-
-	  
 
 	    // 로그 출력 (디버깅용)
 	    System.out.println("Review Data: " + review);
