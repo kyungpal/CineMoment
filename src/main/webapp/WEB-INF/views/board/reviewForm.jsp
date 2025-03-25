@@ -56,6 +56,14 @@
 
 		cnt++;
 	}
+	function validateForm() {
+        var fileInput = document.getElementById("f_main_image");
+        if (!fileInput || fileInput.files.length === 0) {
+            alert("리뷰 이미지를 첨부해야 글을 등록할 수 있습니다.");
+            return false; // 폼 제출 방지
+        }
+        return true; // 제출 허용
+    }
 </script>
 </head>
 <body>
@@ -65,7 +73,8 @@
 
 			<form name="reviewForm" method="post"
 				action="${contextPath }/board/addReview.do"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data"
+				onsubmit="return validateForm()">
 
 				<table>
 					<tr>
@@ -127,7 +136,9 @@
 					</tr>
 					<tr>
 						<th>이미지 첨부</th>
-						<td><input type="button" value="파일 추가" onClick="fn_addFile()" />
+						<td>
+						<input type="file" name="main_image" id="f_main_image" />
+						<!-- <input type="button" value="파일 추가" onClick="fn_addFile()" /> -->
 							<div id="d_file"></div></td>
 					</tr>
 

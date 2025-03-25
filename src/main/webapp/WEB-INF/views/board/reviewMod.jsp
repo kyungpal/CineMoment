@@ -58,6 +58,14 @@ select {
 
 		cnt++;
 	}
+	function validateForm() {
+        var fileInput = document.getElementById("f_main_image");
+        if (!fileInput || fileInput.files.length === 0) {
+            alert("리뷰 이미지를 첨부해야 글을 등록할 수 있습니다.");
+            return false; // 폼 제출 방지
+        }
+        return true; // 제출 허용
+    }
 </script>
 </head>
 <body>
@@ -66,7 +74,8 @@ select {
 
 			<form name="reviewForm" method="post"
 				action="${contextPath }/board/reviewMod.do"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data"
+				onsubmit="return validateForm()">
 
 				<input type="text" name="boardNO" value="${review.board.boardNO}" readOnly /> <!-- 글번호확인용 -->
 				
@@ -133,10 +142,11 @@ select {
 					</tr>
 					<tr>
 						<th>이미지 첨부</th>
-						<td><input type="button" value="파일 추가" onClick="fn_addFile()" />
+						<td>
+						<input type="file" name="main_image" id="f_main_image" />
 							<div id="d_file">
 								<c:forEach var="image" items="${review.imageList}">
-									<img src="${contextPath}/images/${image.fileName}" alt="image" />
+									<img src="${contextPath}/images/${review.boardNO}/${image.fileName}" alt="image" />
 								</c:forEach>
 							</div></td>
 					</tr>
