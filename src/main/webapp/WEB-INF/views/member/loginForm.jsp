@@ -15,39 +15,36 @@
 	font-family: 'GongGothicMedium';
 }
 </style>
-<script src="https://kit.fontawesome.com/d5de41110f.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/d5de41110f.js"
+	crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" charset="text/html; charset=UTF-8">
 <c:choose>
 	<c:when test="${result=='loginFailed' }">
-	  <script>
-	    window.onload=function(){
-	      alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
-	    }
-	  </script>
+		<script>
+			window.onload = function() {
+				alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
+			}
+		</script>
 	</c:when>
-</c:choose>  
+</c:choose>
 </head>
 <body>
-	<div class = "loginForm">
-		<h2>Login</h2>
-
-		<form action="${contextPath}/member/login.do" method="post" id="login-form">
-			
+	<div class="loginForm">
+		<h2>로그인</h2>
+		<form action="${contextPath}/member/login.do" method="post"
+			id="login-form">
 			<table>
 				<tbody>
-					<input type="text" value="" name="member_id" placeholder="EMAIL"/>
-					<input type="password" value="" name="member_pw" placeholder="PASSWORD"/>
-					<a style="text-decoration:none" href="${contextPath}/member/memberForm.do"><i class="fa-solid fa-user"></i>회원가입</a>	
+					<input type="text" value="" name="member_id" placeholder="EMAIL" />
+					<input type="password" value="" name="member_pw"
+						placeholder="PASSWORD" />
+						<a style="text-decoration: none"
+						href="${contextPath}/member/memberForm.do"><i
+						class="fa-solid fa-user"></i>회원가입</a>
 				</tbody>
 			</table>
-			
-			<input type="submit" value="Login"> 
-			<input type="button" style = "font-size : 16px;" value="reset">
-			
-			
+			<input type="submit" class="loginbutton" value="로그인">
 		</form>
-		
 	</div>
-
 </body>
 </html>
