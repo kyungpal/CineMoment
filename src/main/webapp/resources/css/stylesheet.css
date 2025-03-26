@@ -46,7 +46,31 @@ li a {
 	text-decoration: none;
 }
 
-/* �׺�� */
+
+/*로그인버튼  */
+    .loginbutton {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .loginbutton:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            transform: scale(1.05);
+        }
+
+        .loginbutton:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
 
 /* �α����� */
 .login-wrapper {
@@ -698,8 +722,8 @@ position: relative;
 	cursor: pointer;
 	color: #FFFFFF;
 	font-family: 'GongGothicMedium';
-	font-size: 18px;
-	padding: 1px 25px;
+	font-size: 15px;
+	padding: 13px 30px;
 	text-decoration: none;
 	width: auto;
 	heigh: auto;
@@ -723,8 +747,10 @@ position: relative;
 	cursor: pointer;
 	color: #ffffff;
 	font-family: 'GongGothicMedium';
-	font-size: 18px;
-	padding: 1px 25px;
+	font-size: 15px;
+	padding: 13px 30px;
+/* 	font-size: 18px;
+	padding: 1px 25px; */
 	text-decoration: none;
 	width: auto;
 	heigh: auto;
@@ -753,6 +779,7 @@ position: relative;
 .movieSelection_wrap .contents .video_wrap {
 	overflow: hidden;
 	position: relative;
+	margin-top: 30px;
 	width: 100%;
 	height: 100%;
 }
@@ -1332,6 +1359,82 @@ to {
   flex-wrap: nowrap;
   position: relative;
 }
+
+
+/* 한줄평삭제버튼 */
+.delete-btn {
+    background-color: #FF4C4C; /* 붉은색 배경 */
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF; /* 흰색 텍스트 */
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    padding: 5px 10px; /* 여백을 크게 */
+    text-decoration: none;
+    border-radius: 5px; /* 둥근 모서리 */
+    border: none; /* 기본 테두리 제거 */
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+}
+
+.delete-btn:hover {
+    background-color: #FF2A2A; /* 마우스 오버 시 배경색 */
+}
+
+.delete-btn:active {
+    transform: scale(0.95); /* 클릭 시 버튼이 작아지는 효과 */
+}
+
+/* 대댓글등록버튼 */
+.recomment-reg-btn {
+    background-color: #4CAF50; /* 초록색 배경 (성공적인 등록 느낌) */
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF; /* 흰색 텍스트 */
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    padding: 5px 10px; /* 여백을 넓혀서 버튼을 크게 */
+    text-decoration: none;
+    border-radius: 5px; /* 둥근 모서리 */
+    border: none; /* 기본 테두리 제거 */
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+}
+
+.recomment-reg-btn:hover {
+    background-color: #45a049; /* 마우스 오버 시 색상 변경 */
+}
+
+.recomment-reg-btn:active {
+    transform: scale(0.98); /* 클릭 시 버튼이 약간 작아짐 */
+}
+
+
+/*한줄평 등록버튼 */
+.onelinereviewAddBtn {
+    background-color: #4CAF50; /* 초록색 배경 (성공적인 등록 느낌) */
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF; /* 흰색 텍스트 */
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    margin-left: 5px;
+    padding: 5px 10px; /* 여백을 넓혀서 버튼을 크게 */
+    text-decoration: none;
+    border-radius: 5px; /* 둥근 모서리 */
+    border: none; /* 기본 테두리 제거 */
+    transition: background-color 0.3s, transform 0.2s; /* 부드러운 효과 */
+}
+
+.onelinereviewAddBtn:hover {
+    background-color: #45a049; /* 마우스 오버 시 색상 변경 */
+}
+
+.onelinereviewAddBtn:active {
+    transform: scale(0.98); /* 클릭 시 버튼이 약간 작아짐 */
+}
+
+
+
+
 
 .movieDetail > .container > .col-poster-image {
   padding-right: 20px;
