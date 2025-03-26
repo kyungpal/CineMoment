@@ -302,7 +302,7 @@
 						<tr>
 							<th>내용</th>
 							<td><input type="text" name="content" maxlength="50" /><input
-								type="button" value="작성"
+								class="onelinereviewAddBtn" type="button" value="등록"
 								onClick="fn_review_movie('${movieList.movie_id}','id','password','content')" /></td>
 						</tr>
 					</form>
