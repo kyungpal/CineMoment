@@ -15,8 +15,8 @@
 	width: 400px;
 	font-family: 'GongGothicMedium';
 }
-
 </style>
+
 <script>
 	function fn_overlapped() {
 		var _id = $("#_member_id").val();
@@ -64,14 +64,17 @@
 							placeholder="아이디" class="font" />
 						<input type="hidden" name="member_id" id="member_id"
 							placeholder="Id" />
-						<input type="button" style = "background-color : #000; font-size : 16px; color : white;" id="btnOverlapped" value="중복체크"
-							onClick="fn_overlapped()" class="font" />
+						<input type="button"
+							style="background-color: #000; font-size: 16px; color: white;"
+							id="btnOverlapped" value="중복체크" onClick="fn_overlapped()"
+							class="font" />
 					</tr>
 					<tr class="dot_line">
 						<input name="member_pw" type="password" placeholder="비밀번호" />
 					</tr>
 					<tr class="dot_line">
-						<input name="member_name" type="text" placeholder="이름" class="font" />
+						<input name="member_name" type="text" placeholder="이름"
+							class="font" />
 					<tr class="dot_line">
 						<select name="member_hp1" style="width: 70px; height: 48px;">
 							<option selected value="010">010</option>
@@ -79,10 +82,18 @@
 					</tr>
 					</select>
 					<tr>
-						<input type="text" name="member_hp2" placeholder="전화번호" style="max-width: 41%" />
+						<input type="text" name="member_hp2" placeholder="전화번호"
+							style="max-width: 41%" maxlength="4" 
+							oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 					<tr>
-						<input type="text" name="member_hp3" placeholder="전화번호" style="max-width: 41%" />
-						<input type="submit" value="회원가입" class="font">
+						<input type="text" name="member_hp3" placeholder="전화번호"
+							style="max-width: 41%" maxlength="4" 
+							oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+						
+						<input type="submit" value="회원가입" class="submit">
+						
+						
+						<!-- <input type="submit" value="회원가입" class="font" > -->
 				</tbody>
 			</table>
 	</div>
