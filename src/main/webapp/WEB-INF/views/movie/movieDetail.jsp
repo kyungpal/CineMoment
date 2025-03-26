@@ -20,6 +20,19 @@
 			password = review.password.value;
 			content = review.content.value;
 		}
+		//빈칸체크
+		   if (id.trim() === '') {
+		        alert("닉네임을 입력해주세요.");
+		        return;
+		    }
+		    if (password.trim() === '') {
+		        alert("비밀번호를 입력해주세요.");
+		        return;
+		    }
+		    if (content.trim() === '') {
+		        alert("내용을 입력해주세요.");
+		        return;
+		    }
 
 		$.ajax({
 			type : "post",
