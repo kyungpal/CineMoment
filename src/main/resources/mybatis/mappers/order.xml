@@ -129,7 +129,7 @@
                                     movie_running_time
 									)
 			VALUES(
-					MORDER_SEQ_NUM.nextval,
+					MORDER_SEQ.NEXTVAL,
 					#{member_id},
 					#{movie_id},
 					#{movie_price},
