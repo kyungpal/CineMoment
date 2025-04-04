@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  <typeAliases>
+    <typeAlias type="com.cinemoment.movie.movie.vo.MovieVO" alias="movieVO" />
+    <typeAlias type="com.cinemoment.movie.movie.vo.ImageFileVO" alias="imageFileVO" />
+    <typeAlias type="com.cinemoment.movie.member.vo.MemberVO" alias="memberVO" />
+    <typeAlias type="com.cinemoment.movie.order.vo.OrderVO" alias="orderVO" />
+    <typeAlias type="com.cinemoment.movie.mypage.vo.MyPageVO" alias="mypageVO" />
+    <typeAlias type="com.cinemoment.movie.board.vo.BoardVO" alias="boardVO" />
+  </typeAliases>
+</configuration>
+
+
+
