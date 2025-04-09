@@ -83,13 +83,13 @@
 					</select>
 					<tr>
 						<input type="text" name="member_hp2" placeholder="전화번호"
-							style="max-width: 41%" maxlength="4" 
+							style="max-width: 41%" maxlength="4"
 							oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 					<tr>
 						<input type="text" name="member_hp3" placeholder="전화번호"
-							style="max-width: 41%" maxlength="4" 
+							style="max-width: 41%" maxlength="4"
 							oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
-						
+
 						<input type="submit" value="회원가입" class="submit">
 				</tbody>
 			</table>

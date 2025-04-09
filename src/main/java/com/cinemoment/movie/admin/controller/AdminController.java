@@ -30,13 +30,14 @@ import com.cinemoment.movie.member.vo.MemberVO;
 import com.cinemoment.movie.movie.service.MovieService;
 import com.cinemoment.movie.movie.vo.ImageFileVO;
 import com.cinemoment.movie.order.service.OrderService;
+import com.cinemoment.movie.order.vo.OrderVO;
 
 @Controller("adminController")
 @RequestMapping(value = "/admin")
-public class AdminController extends BaseController  {
-	
+public class AdminController extends BaseController {
+
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\movie\\file_repo";
-	
+
 	@Autowired
 	private AdminService adminService;
 
@@ -49,22 +50,60 @@ public class AdminController extends BaseController  {
 	@Autowired
 	private BoardService boardService;
 
-	@RequestMapping(value = "/seatManage.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView seatManage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+	@Autowired
+	private MemberVO memberVO;
+
+	@Autowired
+	private OrderVO orderVO;
+
+	//예매관리 ( 전체회원의 예매내역)
+	@RequestMapping(value = "/orderManage.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView orderManage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView(viewName);
 
-		List seatList1 = orderService.selectSeatList1(); 
-		List seatList2 = orderService.selectSeatList2(); 
-		List seatList3 = orderService.selectSeatList3(); 
-
-		mav.addObject("seatList1", seatList1);
-		mav.addObject("seatList2", seatList2);
-		mav.addObject("seatList3", seatList3);
+		//전체회원 주문내역 뽑아오기
+		List orderList = orderService.selectAllOrderAndSeatStatus();
+		mav.addObject("orderList", orderList);
 
 		return mav;
 	}
+
+	//예매취소
+	@RequestMapping(value = "/adminOrderCancel.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ResponseEntity adminOrderCancel(@RequestParam("morder_seq_num") int morder_seq_num,
+			@RequestParam("schedule_id") int schedule_id, @RequestParam("seat_id") int seat_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String message;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		HttpSession session = request.getSession();
+		ResponseEntity resEnt = null;
+
+		try {
+			orderService.adminOrderCancel(morder_seq_num, schedule_id, seat_id);
+			message = "<script>";
+			message += " alert('예매 취소가 완료되었습니다.');";
+			message += " location.href='" + request.getContextPath() + "/admin/orderManage.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+
+			message = "<script>";
+			message += " alert('예매 취소에 실패하였습니다. 다시 시도해 주세요.');";
+			message += " location.href='" + request.getContextPath() + "/admin/orderManage.do';";
+			message += "</script>";
+
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+
+		return resEnt;
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "/addMovie.do", method = RequestMethod.POST)
 	public ResponseEntity addMovie(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -173,7 +212,7 @@ public class AdminController extends BaseController  {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 		try {
-			
+
 			List<ImageFileVO> deleteImageList = adminService.deleteMovieImage(movie_id);
 			if (deleteImageList != null && deleteImageList.size() != 0) {
 				for (ImageFileVO imageFileVO : deleteImageList) {
@@ -189,9 +228,8 @@ public class AdminController extends BaseController  {
 			message += " </script>";
 
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} 
-		
-		
+		}
+
 		catch (Exception e) {
 
 			message = "<script>";
@@ -335,39 +373,7 @@ public class AdminController extends BaseController  {
 
 	}
 
-	@RequestMapping(value = "/modifySeat.do", method = { RequestMethod.POST })
-	public ResponseEntity modifySeat(@RequestParam("movie_place") String movie_place, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		System.out.println("movie_place" + movie_place);
-		Map<String, String> movieMap = new HashMap<String, String>();
-		movieMap.put("movie_place", movie_place);
-		adminService.modifySeat(movieMap);
-
-		String message = null;
-		ResponseEntity resEntity = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		message = "mod_success";
-		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-		return resEntity;
-	}
-
-	@RequestMapping(value = "/modifySeat1.do", method = { RequestMethod.POST })
-	public ResponseEntity modifySeat1(@RequestParam("movie_place") String movie_place, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		System.out.println("movie_place" + movie_place);
-		Map<String, String> movieMap = new HashMap<String, String>();
-		movieMap.put("movie_place", movie_place);
-		adminService.modifySeat1(movieMap);
-
-		String message = null;
-		ResponseEntity resEntity = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		message = "mod_success";
-		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-		return resEntity;
-	}
-
-	//게시글관리
+	// 게시글관리
 	@RequestMapping(value = "/boardListManage.do", method = RequestMethod.GET)
 	public ModelAndView boardListManage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -375,19 +381,20 @@ public class AdminController extends BaseController  {
 		mav.setViewName(viewName);
 		List eventList = boardService.eventList();
 		List noticeList = boardService.noticeList();
-		
+
 		Map pagingMap = new HashMap();
-	    pagingMap.put("section", 1);
-	    pagingMap.put("pageNum", 1);
-	    
-	    Map boardMap = boardService.reviewList(pagingMap); 
-		
+		pagingMap.put("section", 1);
+		pagingMap.put("pageNum", 1);
+
+		Map boardMap = boardService.reviewList(pagingMap);
+
 		mav.addObject("eventList", eventList);
 		mav.addObject("noticeList", noticeList);
 		mav.addObject("reviewList", boardMap.get("reviewList"));
 		return mav;
 	}
-	//공지글 삭제
+
+	// 공지글 삭제
 	@RequestMapping(value = "/deleteBoard.do", method = RequestMethod.GET)
 	public ResponseEntity deleteBoard(@RequestParam("boardNO") int boardNO, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -402,14 +409,14 @@ public class AdminController extends BaseController  {
 		return resEntity;
 	}
 
-	//이벤트글 삭제
+	// 이벤트글 삭제
 	@RequestMapping(value = "/deleteBoard1.do", method = RequestMethod.GET)
 	public ResponseEntity deleteBoard1(@RequestParam("boardNO") int boardNO, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		System.out.println("boardNO" + boardNO);
 		Map<String, String> movieMap = new HashMap<String, String>();
 		String fileName;
-	
+
 		List<ImageFileVO> deleteImageList = boardService.deleteImageEvent(boardNO);
 
 		if (deleteImageList != null && deleteImageList.size() != 0) {
@@ -429,35 +436,34 @@ public class AdminController extends BaseController  {
 		return resEntity;
 	}
 
-	//리뷰글 삭제
+	// 리뷰글 삭제
 	@RequestMapping(value = "/deleteBoard2.do", method = RequestMethod.GET)
 	public ResponseEntity<String> deleteBoard2(@RequestParam("boardNO") int boardNO, HttpServletRequest request,
-	                                          HttpServletResponse response) throws Exception {
-	    System.out.println("boardNO: " + boardNO);
-	    
-	    Map<String, String> movieMap = new HashMap<>();
-	    
-	    
-	    // 이미지 파일 삭제 로직 추가
-	    try {
-	        List<ImageFileVO> deleteImageList = boardService.deleteImage(boardNO);
-	        if (deleteImageList != null) {
-	            for (ImageFileVO imageFileVO : deleteImageList) {
-	                File destFile = new File(CURR_IMAGE_REPO_PATH + "/" + boardNO + "/" + imageFileVO.getFileName());
-	                if (destFile.exists()) {
-	                    destFile.delete();
-	                }
-	            }
-	            boardService.delete(boardNO);
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return new ResponseEntity<>("delete_fail", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+			HttpServletResponse response) throws Exception {
+		System.out.println("boardNO: " + boardNO);
 
-	    // 삭제 성공 메시지 반환
-	    String message = "delete_success";
-	    return new ResponseEntity<>(message, new HttpHeaders(), HttpStatus.OK);
+		Map<String, String> movieMap = new HashMap<>();
+
+		// 이미지 파일 삭제 로직 추가
+		try {
+			List<ImageFileVO> deleteImageList = boardService.deleteImage(boardNO);
+			if (deleteImageList != null) {
+				for (ImageFileVO imageFileVO : deleteImageList) {
+					File destFile = new File(CURR_IMAGE_REPO_PATH + "/" + boardNO + "/" + imageFileVO.getFileName());
+					if (destFile.exists()) {
+						destFile.delete();
+					}
+				}
+				boardService.delete(boardNO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("delete_fail", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		// 삭제 성공 메시지 반환
+		String message = "delete_success";
+		return new ResponseEntity<>(message, new HttpHeaders(), HttpStatus.OK);
 	}
 
 }

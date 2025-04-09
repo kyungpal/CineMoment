@@ -43,25 +43,30 @@ text {
 }
 </style>
 
-<script type="text/javascript">
-	function test(e, url) {
-		console.log('itemId :' + $(e).attr('id'));
-		$(e).prop("disabled", true);
+<script >
+function test(e, url) {
+    // 좌석 번호는 버튼의 value 속성에 들어있으므로 그걸 사용
+    var seatNum = $(e).val(); // value="${seat.movie_seat_number}"
 
-		var seatNum = $(e).attr('id');
+    console.log('선택한 좌석번호 :' + seatNum);
+    $(e).prop("disabled", true); // 중복 클릭 방지
 
-		var form = document.createElement("form");
-		form.setAttribute("method", "post");
-		form.setAttribute("action", url);
-		var seatNumInput = document.createElement("input");
-		seatNumInput.setAttribute("type", "hidden");
-		seatNumInput.setAttribute("name", "seatNum");
-		seatNumInput.setAttribute("value", seatNum);
+    // 폼 생성
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", url);
 
-		form.appendChild(seatNumInput);
-		document.body.appendChild(form);
-		form.submit();
-	}
+    // hidden input에 좌석 번호 담기
+    var seatNumInput = document.createElement("input");
+    seatNumInput.setAttribute("type", "hidden");
+    seatNumInput.setAttribute("name", "seatNum");
+    seatNumInput.setAttribute("value", seatNum); // 수정된 부분
+
+    form.appendChild(seatNumInput);
+    document.body.appendChild(form);
+    form.submit();
+}
+
 </script>
 
 </head>
@@ -73,150 +78,136 @@ text {
 
 			<div style="text-align: center; margin-top: 20px;">
 
-				<c:if test="${movie_place == '1관' }">
-					<c:forEach var="seatList" items="${seatList1 }"
-						varStatus="seatListNum">
-						<c:if
-							test="${seatList.movie_seat_number >= 3 && seatList.movie_seat_number == 3 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 9 && seatList.movie_seat_number == 9 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 11 && seatList.movie_seat_number == 11 }">
-							<br>
-						</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 13 && seatList.movie_seat_number == 13 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 19 && seatList.movie_seat_number == 19 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 21 && seatList.movie_seat_number == 21 }">
-							<br>
-						</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 23 && seatList.movie_seat_number == 23 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 29 && seatList.movie_seat_number == 29 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 31 && seatList.movie_seat_number == 31 }">
-							<br>
-						</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 33 && seatList.movie_seat_number == 33 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 39 && seatList.movie_seat_number == 39 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 41 && seatList.movie_seat_number == 41 }">
-							<br>
-						</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 43 && seatList.movie_seat_number == 43 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 49 && seatList.movie_seat_number == 49 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 51 && seatList.movie_seat_number == 51 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-						</c:if>
-						<c:if test="${seatList.seatstatus == 'n' }">
-							<input type="button" class="button" name="seat"
-								value="${seatList.movie_seat_number }" disabled />
-						</c:if>
-						<c:if test="${seatList.seatstatus != 'n' }">
-							<input type="button" class="button" name="seat"
-								value="${seatList.movie_seat_number }" id="${seatListNum.count}"
-								onClick="test(this,'${contextPath}/order/ticketingForm.do');" />
-						</c:if>
-					</c:forEach>
-				</c:if>
+<c:if test="${movie_place == '1관'}">
+    <c:forEach var="seat" items="${seatList}" varStatus="status">
+        <c:set var="index" value="${status.index}" />
 
-				<c:if test="${movie_place == '2관' }">
-					<c:forEach var="seatList" items="${seatList2 }"
-						varStatus="seatListNum">
-						<c:if
-							test="${seatList.movie_seat_number >= 5 && seatList.movie_seat_number == 5 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 9 && seatList.movie_seat_number == 9 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 13 && seatList.movie_seat_number == 13 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 17 && seatList.movie_seat_number == 17 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>						
-						<c:if
-							test="${seatList.movie_seat_number >= 21 && seatList.movie_seat_number == 21 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 25 && seatList.movie_seat_number == 25 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 29 && seatList.movie_seat_number == 29 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 33 && seatList.movie_seat_number == 33 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 37 && seatList.movie_seat_number == 37 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 41 && seatList.movie_seat_number == 41 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 45 && seatList.movie_seat_number == 45 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 49 && seatList.movie_seat_number == 49 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 51 && seatList.movie_seat_number == 51 }"></c:if>
-						
-						<c:if test="${seatList.seatstatus == 'n' }">
-							<input type="button" class="button" name="seat"
-								value="${seatList.movie_seat_number }" disabled />
-						</c:if>
-						<c:if test="${seatList.seatstatus != 'n' }">
-							<input type="button" class="button" name="seat"
-								value="${seatList.movie_seat_number }" id="${seatListNum.count}"
-								onClick="test(this,'${contextPath}/order/ticketingForm.do');" />
-						</c:if>
-					</c:forEach>
-				</c:if>
+        <%-- 10개마다 줄바꿈 --%>
+        <c:if test="${index % 10 == 0 && index != 0}">
+            <br>
+        </c:if>
 
-				<c:if test="${movie_place == '3관' }">
-					<c:forEach var="seatList" items="${seatList3 }"
-						varStatus="seatListNum">
-						<c:if
-							test="${seatList.movie_seat_number >= 3 && seatList.movie_seat_number == 3 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 7 && seatList.movie_seat_number == 7 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 8 && seatList.movie_seat_number == 8 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>							
-						<c:if
-							test="${seatList.movie_seat_number >= 12 && seatList.movie_seat_number == 12 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>							
-						<c:if
-							test="${seatList.movie_seat_number >= 13 && seatList.movie_seat_number == 13 }"><br></c:if>		
-						<c:if
-							test="${seatList.movie_seat_number >= 15 && seatList.movie_seat_number == 15 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>	
-						<c:if
-							test="${seatList.movie_seat_number >= 19 && seatList.movie_seat_number == 19 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>											
-						<c:if
-							test="${seatList.movie_seat_number >= 21 && seatList.movie_seat_number == 21 }"><br><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 24 && seatList.movie_seat_number == 24 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>							
-						<c:if
-							test="${seatList.movie_seat_number >= 28 && seatList.movie_seat_number == 28 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>							
-						<c:if
-							test="${seatList.movie_seat_number >= 31 && seatList.movie_seat_number == 31 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 35 && seatList.movie_seat_number == 35 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>	
-						<c:if
-							test="${seatList.movie_seat_number >= 39 && seatList.movie_seat_number == 39 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>							
-						<c:if
-							test="${seatList.movie_seat_number >= 43 && seatList.movie_seat_number == 43 }"><br></c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 43 && seatList.movie_seat_number == 45 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-						<c:if
-							test="${seatList.movie_seat_number >= 49 && seatList.movie_seat_number == 49 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+        <%-- 좌석 버튼 출력 (예약 여부에 따라 다르게 표시) --%>
+        <c:choose>
+            <c:when test="${seat.is_reserved == 'Y'}">
+                <input type="button" class="button reserved" 
+                    value="${seat.movie_seat_number} (예약됨)" 
+                    id="seat_${movie_place}_${seat.movie_seat_number}" 
+                    disabled />
+            </c:when>
+            <c:otherwise>
+                <input type="button" class="button"
+                    value="${seat.movie_seat_number}"
+                    id="seat_${movie_place}_${seat.movie_seat_number}"
+                    onclick="location.href='${contextPath}/order/ticketingForm.do?seat_id=${seat.seat_id}&schedule_id=${schedule.schedule_id}&seatNum=${seat.movie_seat_number}'" />
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</c:if>
+<c:if test="${movie_place == '2관'}">
+    <c:forEach var="seat" items="${seatList}" varStatus="status">
+        <c:set var="index" value="${status.index}" />
 
-						
-						<c:if test="${seatList.seatstatus == 'n' }">
-							<input type="button" class="button" name="seat"
-								value="${seatList.movie_seat_number }" disabled />
-						</c:if>
-						<c:if test="${seatList.seatstatus != 'n' }">
-							<input type="button" class="button" name="seat"
-								value="${seatList.movie_seat_number }" id="${seatListNum.count}"
-								onClick="test(this,'${contextPath}/order/ticketingForm.do');" />
-						</c:if>
-					</c:forEach>
-				</c:if>
+        <%-- 10개마다 줄바꿈 --%>
+        <c:if test="${index % 10 == 0 && index != 0}">
+            <br>
+        </c:if>
+
+        <%-- 좌석 버튼 출력 (예약 여부에 따라 다르게 표시) --%>
+        <c:choose>
+            <c:when test="${seat.is_reserved == 'Y'}">
+                <input type="button" class="button reserved" 
+                    value="${seat.movie_seat_number} (예약됨)" 
+                    id="seat_${movie_place}_${seat.movie_seat_number}" 
+                    disabled />
+            </c:when>
+            <c:otherwise>
+                <input type="button" class="button"
+                    value="${seat.movie_seat_number}"
+                    id="seat_${movie_place}_${seat.movie_seat_number}"
+                    onclick="location.href='${contextPath}/order/ticketingForm.do?seat_id=${seat.seat_id}&schedule_id=${schedule.schedule_id}&seatNum=${seat.movie_seat_number}'" />
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</c:if>
+<c:if test="${movie_place == '3관'}">
+    <c:forEach var="seat" items="${seatList}" varStatus="status">
+        <c:set var="index" value="${status.index}" />
+
+        <%-- 10개마다 줄바꿈 --%>
+        <c:if test="${index % 10 == 0 && index != 0}">
+            <br>
+        </c:if>
+
+        <%-- 좌석 버튼 출력 (예약 여부에 따라 다르게 표시) --%>
+        <c:choose>
+            <c:when test="${seat.is_reserved == 'Y'}">
+                <input type="button" class="button reserved" 
+                    value="${seat.movie_seat_number} (예약됨)" 
+                    id="seat_${movie_place}_${seat.movie_seat_number}" 
+                    disabled />
+            </c:when>
+            <c:otherwise>
+                <input type="button" class="button"
+                    value="${seat.movie_seat_number}"
+                    id="seat_${movie_place}_${seat.movie_seat_number}"
+                    onclick="location.href='${contextPath}/order/ticketingForm.do?seat_id=${seat.seat_id}&schedule_id=${schedule.schedule_id}&seatNum=${seat.movie_seat_number}'" />
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</c:if>
+<c:if test="${movie_place == '4관'}">
+    <c:forEach var="seat" items="${seatList}" varStatus="status">
+        <c:set var="index" value="${status.index}" />
+
+        <%-- 10개마다 줄바꿈 --%>
+        <c:if test="${index % 10 == 0 && index != 0}">
+            <br>
+        </c:if>
+
+        <%-- 좌석 버튼 출력 (예약 여부에 따라 다르게 표시) --%>
+        <c:choose>
+            <c:when test="${seat.is_reserved == 'Y'}">
+                <input type="button" class="button reserved" 
+                    value="${seat.movie_seat_number} (예약됨)" 
+                    id="seat_${movie_place}_${seat.movie_seat_number}" 
+                    disabled />
+            </c:when>
+            <c:otherwise>
+                <input type="button" class="button"
+                    value="${seat.movie_seat_number}"
+                    id="seat_${movie_place}_${seat.movie_seat_number}"
+                    onclick="location.href='${contextPath}/order/ticketingForm.do?seat_id=${seat.seat_id}&schedule_id=${schedule.schedule_id}&seatNum=${seat.movie_seat_number}'" />
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</c:if>
+<c:if test="${movie_place == '5관'}">
+    <c:forEach var="seat" items="${seatList}" varStatus="status">
+        <c:set var="index" value="${status.index}" />
+
+        <%-- 10개마다 줄바꿈 --%>
+        <c:if test="${index % 10 == 0 && index != 0}">
+            <br>
+        </c:if>
+
+        <%-- 좌석 버튼 출력 (예약 여부에 따라 다르게 표시) --%>
+        <c:choose>
+            <c:when test="${seat.is_reserved == 'Y'}">
+                <input type="button" class="button reserved" 
+                    value="${seat.movie_seat_number} (예약됨)" 
+                    id="seat_${movie_place}_${seat.movie_seat_number}" 
+                    disabled />
+            </c:when>
+            <c:otherwise>
+                <input type="button" class="button"
+                    value="${seat.movie_seat_number}"
+                    id="seat_${movie_place}_${seat.movie_seat_number}"
+                    onclick="location.href='${contextPath}/order/ticketingForm.do?seat_id=${seat.seat_id}&schedule_id=${schedule.schedule_id}&seatNum=${seat.movie_seat_number}'" />
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</c:if>
 			</div>
 		</div>
 	</div>

@@ -39,71 +39,34 @@ img {
 	color: white;
 }
 
-
-
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
+	</head>
+	<body>
+		<div id="outer_wrap">
+			<div id="wrap">
 
-	window.onload = function() {
-		datepicker = new Date();
-		console.log("datepicker.toISOString() >>>" + datepicker.toISOString());
-		datepicker = datepicker.toISOString().slice(0, 10);
-		console.log("datepicker >>>> " + datepicker);
-		bir = document.getElementById("datepicker");
-		bir.value = datepicker;
-	}
-	
-	$( function() {
-	    $( "#datepicker" ).datepicker();
-	  } );
-	
-	// DatePicker
-	// 기본 영어 => 한글로 변환
-	
-
-	$.datepicker._gotoToday = function(id) { 
-		$(id).datepicker('setDate', new Date());
-		$(".ui-datepicker").hide().blur();
-	};
-	
-	// Datepicker 적용할 id 가져오기
-	$(function() {
-	  $("#mypoll_fromDate").datepicker();
-	  $("#mypoll_toDate").datepicker();
-	  $("#refund_fromDate").datepicker();
-	  $("#refund_toDate").datepicker();
-	  $("#refund_endSurvey").datepicker();
-	} );
-	
-</script>
-</head>
-<body>
-	<div id="outer_wrap">
-		<div id="wrap">
-
-			<div style="text-align: center; margin-top: 20px;">
+				<div style="text-align: center; margin-top: 20px;">
+						
+					<form name="timeselectForm" method="post" action="${contextPath }/order/seatselect.do" enctype="text">
 					
-				<form name="timeselectForm" method="post" action="${contextPath }/order/seatselect.do" enctype="text">
-				
-					<input type="text" class="timeselectinput" id="datepicker" name="movie_screening_date" style="height:45px; border-radius:10px" readonly />
-				
-				
-				<select name="movie_running_time" class="select">
-						<option value="11:00" selected="selected">11:00</option>
-						<option value="13:00">13:00</option>
-						<option value="15:00">15:00</option>
-						<option value="17:00">17:00</option>
-						<option value="17:00">19:00</option>
-				</select> 
-					<select name="movie_place" class="select">
-						<option value="1관" selected="selected">1관</option>
-						<option value="2관">2관</optime>
-						<option value="3관">3관</optime>
-					</select><br> 
-					<input type="submit" class="button" value="좌석 선택하기" id="font" />
+					<br> 
+		<form action="${contextPath}/seatselect.do" method="post">
+    	<select name="schedule_id">
+        <c:forEach var="schedule" items="${scheduleList}">
+         <option value="${schedule.schedule_id}">
+          ${schedule.movie_screening_date} ${schedule.movie_running_time} ${schedule.movie_place}
+        </option>
+        </c:forEach>
+    </select>
+    <!-- movie_place는 첫 번째 schedule 기준으로 전달 -->
+    <input type="hidden" name="movie_place" value="${scheduleList[0].movie_place}" />
+    <input type="submit" value="좌석 선택하기" />
+		</form>
+
+		
 				</form>
 			</div>
 		</div>

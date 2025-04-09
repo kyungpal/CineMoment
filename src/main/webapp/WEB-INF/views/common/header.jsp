@@ -190,8 +190,8 @@
 					</div>
 					<div class="dropdown">
 						<button class="dropbtn"
-							onclick="location.href= '${contextPath }/admin/seatManage.do'">
-							좌석관리</button>
+							onclick="location.href= '${contextPath }/admin/orderManage.do'">
+							예매관리</button>
 					</div>
 					<div class="dropdown">
 						<button class="dropbtn"

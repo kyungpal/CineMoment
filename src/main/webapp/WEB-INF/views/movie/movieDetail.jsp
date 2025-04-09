@@ -56,8 +56,6 @@
 				alert("에러가 발생했습니다." + data);
 			},
 			complete : function(data, textStatus) {
-				//alert("작업을완료 했습니다");
-
 			}
 
 		});
@@ -156,7 +154,6 @@
 							<strong>┗</strong>
 						</c:otherwise>
 					</c:choose>
-
 
 					<td class="review-td ${oneLineReviewList.oneLineReviewNO}"><a
 						style="color: blue;"><strong>${oneLineReviewList.id }</strong></a><br>${oneLineReviewList.content }

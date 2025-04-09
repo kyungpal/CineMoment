@@ -1,6 +1,7 @@
 package com.cinemoment.movie.mypage.controller;
 
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +46,11 @@ public class MypageController {
 	@Autowired
 	private OrderService orderService;
 	
+	
+	//마이페이지 
 	@RequestMapping(value = "/mypage.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView main(String message, HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView main(
+			String message, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		HttpSession session = request.getSession();
 		String member_id = "";
@@ -83,7 +87,8 @@ public class MypageController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/myOrderDetail.do", method = RequestMethod.GET)
+	//예매내역정보
+	@RequestMapping(value = "/myOrderDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView myOrderDetail(String member_id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		HttpSession session = request.getSession();
@@ -100,6 +105,7 @@ public class MypageController {
 		return mav;
 	}
 	
+	//내 상세정보
 	@RequestMapping(value = "/myDetailInfo.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView myDetailInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -107,6 +113,7 @@ public class MypageController {
 		return mav;
 	}
 	
+	//내정보 수정
 	@RequestMapping(value = "/modifyMyInfo.do", method = RequestMethod.POST)
 	public ResponseEntity modifyMyInfo(@RequestParam("attribute") String attribute,
 									   @RequestParam("value") String value,
@@ -140,5 +147,46 @@ public class MypageController {
 			resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 			return resEntity;
 		}
+	
+	//예매취소
+	@RequestMapping(value = "/orderCancel.do", method={RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity orderCancel(@RequestParam("morder_seq_num") int morder_seq_num,
+									@RequestParam("schedule_id") int schedule_id,							
+									@RequestParam("seat_id") int seat_id,
+										HttpServletRequest request, 
+										HttpServletResponse response) throws Exception {
+	    String message;
+	    HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    
+	    HttpSession session = request.getSession();
+	    
+	
+	    ResponseEntity resEnt = null;
+
+	    try {
+	        orderService.orderCancel(morder_seq_num,schedule_id,seat_id);
+
+	        message = "<script>";
+	        message += " alert('예매 취소가 완료되었습니다.');";
+	        message += " location.href='" + request.getContextPath() + "/mypage/myOrderDetail.do';";
+	        message += "</script>";
+
+	        resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	    } catch (Exception e) {
+	        message = "<script>";
+	        message += " alert('예매 취소에 실패하였습니다. 다시 시도해 주세요.');";
+	        message += " location.href='" + request.getContextPath() + "/mypage/myOrderDetail.do';";
+	        message += "</script>";
+
+	        resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	        e.printStackTrace();
+	    }
+
+	    return resEnt;
+	}
+
+	
+	
 	
 }

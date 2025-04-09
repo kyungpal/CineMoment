@@ -1,5 +1,6 @@
 package com.cinemoment.movie.order.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.cinemoment.movie.order.vo.OrderVO;
+import com.cinemoment.movie.order.vo.SeatVO;
 
 @Repository("orderDAO")
 public class OrderDAOImpl implements OrderDAO {
@@ -28,23 +30,6 @@ public class OrderDAOImpl implements OrderDAO {
 		return titleList2;
 	}
 
-	@Override
-	public List seatStatusList1() throws DataAccessException {
-		List<OrderVO> seatList1 = sqlSession.selectList("mapper.order.seatList1");
-		return seatList1;
-	}
-
-	@Override
-	public List seatStatusList2() throws DataAccessException {
-		List<OrderVO> seatList2 = sqlSession.selectList("mapper.order.seatList2");
-		return seatList2;
-	}
-
-	@Override
-	public List seatStatusList3() throws DataAccessException {
-		List<OrderVO> seatList3 = sqlSession.selectList("mapper.order.seatList3");
-		return seatList3;
-	}
 
 	@Override
 	public void addOrder(Map orderMap) throws DataAccessException {
@@ -52,22 +37,11 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public void seatStatusUpdate1(Map orderMap) throws DataAccessException {
-		sqlSession.update("mapper.order.seatStatusUpdate1", orderMap);
+	public void seatStatusUpdate(Map orderMap) throws DataAccessException {
+		sqlSession.insert("mapper.order.seatStatusUpdate", orderMap);
 
 	}
 
-	@Override
-	public void seatStatusUpdate2(Map orderMap) throws DataAccessException {
-		sqlSession.update("mapper.order.seatStatusUpdate2", orderMap);
-
-	}
-
-	@Override
-	public void seatStatusUpdate3(Map orderMap) throws DataAccessException {
-		sqlSession.update("mapper.order.seatStatusUpdate3", orderMap);
-
-	}
 
 	@Override
 	public int findMovieId(String movie_title) throws DataAccessException {
@@ -81,4 +55,41 @@ public class OrderDAOImpl implements OrderDAO {
 				sqlSession.selectList("mapper.order.selectMyOrderDetailInfo", member_id);
 		return selectMyOrderDetailInfo;
 	}
+	
+	@Override
+	public List selectSchedulesByMovieId(int movie_id) throws DataAccessException{
+		return sqlSession.selectList("mapper.order.selectSchedulesByMovieId", movie_id);
+	}
+	
+	@Override
+	public List selectSeatListByPlace(Map<String, Object> paramMap) throws DataAccessException{
+		return sqlSession.selectList("mapper.order.selectSeatListByPlace", paramMap);
+	}
+	
+	@Override
+	public OrderVO selectScheduleById(int schedule_id) throws DataAccessException {
+	    return sqlSession.selectOne("mapper.order.selectScheduleById", schedule_id);
+	}
+
+	@Override
+	public List<OrderVO> selectAllOrderList() throws DataAccessException {
+	    return sqlSession.selectList("mapper.order.selectAllOrderList");
+	}
+	
+	
+	@Override
+	public void orderCancel(int morder_seq_num) throws DataAccessException {
+		sqlSession.delete("mapper.order.orderCancel", morder_seq_num);
+	}
+	
+
+	@Override
+	public void deleteSeatStatus(int schedule_id, int seat_id) throws DataAccessException {
+	    Map<String, Object> paramMap = new HashMap<>();
+	    paramMap.put("schedule_id", schedule_id);
+	    paramMap.put("seat_id", seat_id);
+	    sqlSession.delete("mapper.order.deleteSeatStatus", paramMap);
+	}
+	
+
 }

@@ -35,6 +35,8 @@ public class MovieController {
 	@Autowired
 	private MovieVO movieVO;
 
+	
+	//영화정보
 	@RequestMapping(value = "/movieDetail.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView movieDetail(@RequestParam("movie_id") int movie_id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -50,6 +52,7 @@ public class MovieController {
 		return mav;
 	}
 
+	//영화 검색
 	@RequestMapping(value = "/searchMovie.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView searchMovie( @RequestParam(value = "movie_keyword") String movie_keyword, 
 									HttpServletRequest request,
@@ -67,6 +70,8 @@ public class MovieController {
 
 		return mav;
 	}
+	
+	// 검색 키워드 자동완성
 	@RequestMapping(value = "/keywordSearch.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String keywordSearch(@RequestParam("keyword") String keyword, HttpServletRequest request,
@@ -87,6 +92,7 @@ public class MovieController {
 		return jsonInfo;
 	}
 
+	//한줄평(댓글)ㄴ
 	@RequestMapping(value = "/oneLineReview.do", method = RequestMethod.POST)
 	public ResponseEntity oneLineReview(@RequestParam("movie_id") String movie_id, @RequestParam("id") String id,
 										@RequestParam("password") String password, @RequestParam("content") String content,

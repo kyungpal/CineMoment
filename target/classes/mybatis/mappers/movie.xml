@@ -8,7 +8,7 @@
 	<resultMap id="movieResult" type="movieVO">
 		<result property="movie_id" column="movie_id" />
 		<result property="movie_title" column="movie_title" />
-		<result property="movie_keyword" column="movie_keyword" />
+<!-- 		<result property="movie_keyword" column="movie_keyword" /> -->
 		<result property="movie_genre" column="movie_genre" />
 		<result property="movie_time" column="movie_time" />
 		<result property="movie_director" column="movie_director" />

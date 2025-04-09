@@ -6,42 +6,69 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:if test="${empty sessionScope.member}">
-    <script>
-        alert('로그인이 필요합니다.');
-        location.href = '${contextPath}/member/loginForm.do'; // 로그인 페이지로 리디렉트
-    </script>
+	<script>
+		alert('로그인이 필요합니다.');
+		location.href = '${contextPath}/member/loginForm.do'; // 로그인 페이지로 리디렉트
+	</script>
 </c:if>
 <html>
 <head>
 <style>
-    /* focus는 선택되서 커서가 깜빡일 때를 이야기함*/
-    input[type="text"] {
-    font-size: 17px;
-     color:black; 
-    font-weight: bold;  border-radius: 10px;
-    }
-    
-    input[type="text"]:focus{
-     background-color:lemonchiffon;
-    }
-
-	textarea{
+/* focus는 선택되서 커서가 깜빡일 때를 이야기함*/
+input[type="text"] {
 	font-size: 17px;
-	 color:black; 
-    font-weight: bold;
-    border-radius: 10px;
-	}
-	
-	textarea:focus{
-	 background-color:lemonchiffon;
-	}
-	
-	select{
-	olor:black; 
-    font-weight: bold;  border-radius: 10px;
-    font-size: 17px;
-	}
-  </style>
+	color: black;
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+input[type="text"]:focus {
+	background-color: lemonchiffon;
+}
+
+textarea {
+  font-size: 16px;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  color: #333;
+  background-color: #fefefe;
+  font-weight: 500;
+  line-height: 1.6;
+  padding: 14px 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  resize: vertical;
+  width: 100%;
+  white-space: pre-wrap;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+textarea:focus {
+  outline: none;
+  background-color: #fffbea;
+  border-color: #f4c430;
+  box-shadow: 0 0 0 3px rgba(244, 196, 48, 0.3);
+}
+
+/* textarea {
+	font-size: 17px;
+	color: black;
+	font-weight: bold;
+	border-radius: 10px;
+	white-space: pre-wrap;
+}
+
+textarea:focus {
+	background-color: lemonchiffon;
+} */
+
+select {
+	olor: black;
+	font-weight: bold;
+	border-radius: 10px;
+	font-size: 17px;
+}
+</style>
 
 <link href="${contextPath}/resources/css/table.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -63,19 +90,19 @@
 	}
 	function validateForm() {
 		var boardContent = document.getElementById("Content")
-        var fileInput = document.getElementById("f_main_image");
-		   // 리뷰 이미지가 없으면 경고
-        if (!fileInput || fileInput.files.length === 0) {
-            alert("리뷰 이미지를 첨부해야 글을 등록할 수 있습니다.");
-            return false; // 폼 제출 방지
-        }
-        // 글 내용이 비어있으면 경고
-        if (!boardContent || boardContent.value.trim() === "") {
-            alert("글 내용을 작성해야 합니다.");
-            return false; // 폼 제출 방지
-        }
-        return true; // 제출 허용
-    }
+		var fileInput = document.getElementById("f_main_image");
+		// 리뷰 이미지가 없으면 경고
+		if (!fileInput || fileInput.files.length === 0) {
+			alert("리뷰 이미지를 첨부해야 글을 등록할 수 있습니다.");
+			return false; // 폼 제출 방지
+		}
+		// 글 내용이 비어있으면 경고
+		if (!boardContent || boardContent.value.trim() === "") {
+			alert("글 내용을 작성해야 합니다.");
+			return false; // 폼 제출 방지
+		}
+		return true; // 제출 허용
+	}
 </script>
 </head>
 <body>
@@ -85,8 +112,7 @@
 
 			<form name="reviewForm" method="post"
 				action="${contextPath }/board/addReview.do"
-				enctype="multipart/form-data"
-				onsubmit="return validateForm()">
+				enctype="multipart/form-data" onsubmit="return validateForm()">
 
 				<table>
 					<tr>
@@ -105,8 +131,8 @@
 					</tr>
 					<tr>
 						<th>글 내용</th>
-						<td><textarea name="boardContent" rows="10" cols="99" id="Content"
-								maxlength="4000"></textarea></td>
+						<td><textarea name="boardContent" rows="10" cols="99"
+								id="Content" maxlength="4000"></textarea></td>
 					</tr>
 					<tr>
 						<th>평점</th>
@@ -148,8 +174,7 @@
 					</tr>
 					<tr>
 						<th>이미지 첨부</th>
-						<td>
-						<input type="file" name="main_image" id="f_main_image" />
+						<td><input type="file" name="main_image" id="f_main_image" />
 							<div id="d_file"></div></td>
 					</tr>
 

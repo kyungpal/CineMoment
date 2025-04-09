@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cinemoment.movie.admin.dao.AdminDAO;
+import com.cinemoment.movie.member.vo.MemberVO;
 import com.cinemoment.movie.movie.vo.ImageFileVO;
 import com.cinemoment.movie.movie.vo.MovieVO;
+import com.cinemoment.movie.order.vo.OrderVO;
 
 @Service("adminService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -70,30 +72,10 @@ public class AdminServiceImpl implements AdminService {
 	public void modifyMovieImage(List<ImageFileVO> imageFileList) throws Exception {
 		adminDAO.updateMovieImage(imageFileList);
 	}
-
+	
 	@Override
-	public void modifySeat(Map movieMap) throws Exception {
-		String movie_place = (String) movieMap.get("movie_place");
-		if (movie_place.equals("1관")) {
-			adminDAO.updateSeat(movieMap);
-		} else if (movie_place.equals("2관")) {
-			adminDAO.updateSeat1(movieMap);
-		} else if (movie_place.equals("3관")) {
-			adminDAO.updateSeat2(movieMap);
+	public List<OrderVO> selectOrderDetailInfo(String member_id)throws Exception {
+		return adminDAO.selectOrderDetailInfo(member_id);
 		}
-
+		
 	}
-
-	@Override
-	public void modifySeat1(Map movieMap) throws Exception {
-		String movie_place = (String) movieMap.get("movie_place");
-		if (movie_place.equals("1관")) {
-			adminDAO.updateSeatN(movieMap);
-		} else if (movie_place.equals("2관")) {
-			adminDAO.updateSeatN1(movieMap);
-		} else if (movie_place.equals("3관")) {
-			adminDAO.updateSeatN2(movieMap);
-		}
-
-	}
-}

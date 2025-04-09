@@ -1,6 +1,5 @@
 package com.cinemoment.movie.order.controller;
 
-import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cinemoment.movie.member.vo.MemberVO;
 import com.cinemoment.movie.order.service.OrderService;
 import com.cinemoment.movie.order.vo.OrderVO;
+import com.cinemoment.movie.order.vo.SeatVO;
 
 @Controller("orderController")
 @RequestMapping(value="/order")
@@ -39,6 +39,8 @@ public class OrderController {
 	@Autowired
 	private MemberVO memberVO;
 	
+	
+	//빠른예매
 	@RequestMapping(value = "/ticketing.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView MovieTitleList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
@@ -61,82 +63,112 @@ public class OrderController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/seatselect.do", method = RequestMethod.POST)
+	
+	//상영시간선택
+		@RequestMapping(value="/timeselect.do", method = RequestMethod.POST)
+		private ModelAndView timeSelect(@RequestParam("movieNum") int movieNum,
+										@RequestParam("movieTitle") String movieTitle,
+										HttpServletRequest request, HttpServletResponse response) throws Exception{
+			System.out.println("영화 번호: " + movieNum);
+			String viewName = (String) request.getAttribute("viewName");
+			HttpSession session = request.getSession();
+			ModelAndView mav = new ModelAndView(viewName);
+			 // 세션에 영화 정보 저장
+			session.setAttribute("movieNum", movieNum);
+			session.setAttribute("movieTitle", movieTitle);
+			
+			List<OrderVO> scheduleList = orderService.selectSchedulesByMovieId(movieNum);
+		    System.out.println("scheduleList: " + scheduleList); // null이나 비어있지 않은지 체크
+
+		    mav.addObject("movie_id", movieNum);
+		    mav.addObject("scheduleList", scheduleList);
+			
+			return mav;
+		}
+		
+	
+	//좌석선택
+	@RequestMapping(value = "/seatselect.do", method =  RequestMethod.POST)
 	private ModelAndView seatSelect (HttpServletRequest request, HttpServletResponse response) throws Exception{
-		//현재 사용자의 세션을 가져오는 코드
-		//클라이언트(사용자)별로 데이터를 저장하는 공간
-		//로그인 정보, 장바구니, 사용자 설정 등을 저장할 때 사용
-		//사용자가 처음 요청하면 새로운 세션이 생성됨.
-		//기존 세션이 있으면 해당 세션을 반환.
-		//세션은 서버에서 유지되며, 쿠키(JSESSIONID)를 사용해 클라이언트를 구분.
 		HttpSession session = request.getSession();
 		Enumeration enu = request.getParameterNames();//request.getParameter("name")처럼 개별 값을 가져오는 게 아니라, 모든 요청 파라미터의 이름을 가져오는 것! , 클라이언트가 보낸 모든 요청 파라미터의 이름을 가져옴.
-		String movie_place = (String) session.getAttribute("movie_place");//로그인 정보, 장바구니 데이터 등 장기적으로 유지해야 할 값을 저장하는 데 사용됨.
 		String viewName = (String) request.getAttribute("viewName"); //요청이 끝나면 사라짐 → 새로운 요청에서는 값이 유지되지 않음.
 		ModelAndView mav = new ModelAndView(viewName);
 		
-		//Enumeration에 더 가져올 요소가 있는 동안 반복문을 실행하라는 의미!
-		//즉, request.getParameterNames()로 가져온 모든 파라미터 이름을 하나씩 처리할 때 사용됨.
-		//while문의 동작 방식
-		//enu.hasMoreElements()가 true라면, while문 실행.
-		//enu.nextElement()를 호출해서 다음 요소를 가져옴.
-		//요소가 남아 있는 동안 계속 반복.
-		//모든 요소를 가져오면 false가 되어 while문 종료.Enumeration에 더 가져올 요소가 있는 동안 반복문을 실행하라는 의미!
 		while (enu.hasMoreElements()) {
-			 String name = (String) enu.nextElement(); // 요청 파라미터 이름 가져오기, enu.nextElement()의 반환 타입이 Object 타입이므로 (String)명시적 형변환(캐스팅)
+			 String name = (String) enu.nextElement(); 
 			 String value = request.getParameter(name); // 해당 파라미터 값 가져오기
 			 session.setAttribute(name, value); // 세션에 저장
 		}
-		List seatList1 = orderService.selectSeatList1(); // 1관
-		List seatList2 = orderService.selectSeatList2(); // 2관
-		List seatList3 = orderService.selectSeatList3(); // 3관
-		mav.addObject("seatList1", seatList1);
-		mav.addObject("seatList2", seatList2);
-		mav.addObject("seatList3", seatList3);
-		mav.addObject("moviePlace", movie_place);
-		return mav;
-	}
-	
-	@RequestMapping(value = "/ticketingForm.do", method = RequestMethod.POST)
-	private ModelAndView ticketingForm(@RequestParam("seatNum") int seatNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		HttpSession session = request.getSession();
-		System.out.println("ticketingForm.do :" + seatNum);
-		session.setAttribute("seatNum", seatNum);
-		String member_id = (String) session.getAttribute("member_id");
-		String movie_place = (String) session.getAttribute("movie_place"); 
-		String movieTitle = (String) session.getAttribute("movieTitle"); 
-		String movie_screening_date = (String) session.getAttribute("movie_screening_date"); 
-		String movie_running_time = (String) session.getAttribute("movie_running_time"); 
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("movieTitle", movieTitle);
-		mav.addObject("seatNum", seatNum);
+		
+		String movie_place = request.getParameter("movie_place");
+		System.out.println("파라미터로 넘어온 상영관: " + movie_place);
+		
+		
+		String schedule_id_str = request.getParameter("schedule_id");
+		System.out.println("넘어온 schedule_id: " + schedule_id_str);
+		int schedule_id = Integer.parseInt(schedule_id_str);
+		session.setAttribute("schedule_id", schedule_id);
+		OrderVO schedule = orderService.selectScheduleById(schedule_id);
+		
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("movie_place", movie_place);
+		paramMap.put("schedule_id", schedule_id);
+		List<SeatVO> seatList = orderService.selectSeatListByPlace(paramMap);
+		
+		
+		mav.addObject("seatList", seatList);
+		mav.addObject("schedule", schedule); 
 		mav.addObject("movie_place", movie_place);
-		mav.addObject("movie_screening_date", movie_screening_date);
-		mav.addObject("movie_running_time", movie_running_time);
-		mav.addObject("member_id", member_id);
-
-		return mav;
-
-	}
-	
-	@RequestMapping(value="/timeselect.do", method = RequestMethod.POST)
-	private ModelAndView timeSelect(@RequestParam("movieNum") int movieNum,
-									@RequestParam("movieTitle") String movieTitle,
-									HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		String viewName = (String) request.getAttribute("viewName");
-		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		session.setAttribute("movieNum", movieNum);
-		session.setAttribute("movieTitle", movieTitle);
-		
 		return mav;
 	}
+
 	
+	//티켓폼 구매정보입력
+	@RequestMapping(value = "/ticketingForm.do", method = {RequestMethod.POST, RequestMethod.GET})
+	private ModelAndView ticketingForm(
+	        @RequestParam("seatNum") String seatNum,
+	        @RequestParam("seat_id") String seat_id,
+	        @RequestParam("schedule_id") int schedule_id,
+	        HttpServletRequest request,
+	        HttpServletResponse response) throws Exception {
+	    HttpSession session = request.getSession();
+	    String viewName = (String) request.getAttribute("viewName");
+	    ModelAndView mav = new ModelAndView(viewName);
+	    
+	    // 파라미터 기본 검증
+	    if (seat_id == null || seat_id.isEmpty() ||
+	        seatNum == null || seatNum.isEmpty() ||
+	        schedule_id <= 0) {
+	        mav.setViewName("redirect:/main/main.do");
+	        return mav;
+	    }
+	    // 세션 검증
+	    if (session.getAttribute("movieTitle") == null || session.getAttribute("movie_place") == null) {
+	        return new ModelAndView("redirect:/main/main.do"); // 예시
+	    }
+	    
+	    
+	    // 필수 정보 세션에 저장
+	    session.setAttribute("seat_id", seat_id); // 좌석 아이디
+	    session.setAttribute("schedule_id", schedule_id); // 상영정보 아이디 
+	    session.setAttribute("movie_seat_number", seatNum); // 좌석번호
+	    
+	    // 상영일/시간은 DB에서 불러오는 방식으로 수정
+	    OrderVO schedule = orderService.selectScheduleById(schedule_id); // DB에서 조회
+
+	    // 모델에 값 담기
+	    mav.addObject("seat_id", seat_id);
+	    mav.addObject("schedule_id", schedule_id);
+	    // schedule에서 날짜와 시간 가져올 수 있어야 함 (JSP에서 schedule.movie_screening_date 등으로)
+	    mav.addObject("schedule", schedule);
+
+	    return mav;
+	}
+
+	
+	//예매하기
 	@RequestMapping(value = "addOrder.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity addOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -196,13 +228,18 @@ public class OrderController {
 
 		int movieNum = (int) session.getAttribute("movieNum");
 
-		System.out.println("movieNum :" + movieNum);
 		orderMap.put("movie_id", movieNum);
 		session.removeAttribute("movieNum");
 		session.removeAttribute("movie_screening_date");
 		session.removeAttribute("movie_running_time");
 		session.removeAttribute("movie_place");
 
+		
+		String seat_id = (String) session.getAttribute("seat_id");
+		int schedule_id = (Integer) session.getAttribute("schedule_id");
+		orderMap.put("seat_id", seat_id);
+		orderMap.put("schedule_id", schedule_id);
+		
 		Random random = new Random();
 		int ticket_number = random.nextInt(999999);
 		orderMap.put("ticket_number", ticket_number);
@@ -215,7 +252,7 @@ public class OrderController {
 		try {
 			orderService.addOrder(orderMap);
 			message = "<script>";
-			message += " alert('예매에 성공했습니다.');";
+			message += " alert('결제 완료 되었습니다.');";
 			message += " location.href='" + request.getContextPath() + "/mypage/mypage.do'; ";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -229,5 +266,7 @@ public class OrderController {
 		}
 		return resEnt;
 	}
+	
+	
 
 }

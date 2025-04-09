@@ -21,7 +21,33 @@
 		<result property="movie_status" column="movie_status" />
 		<result property="filename" column="filename" />
 	</resultMap>
+	<resultMap id="orderMovieResult" type="OrderVO">
+		<result property="order_id" column="order_id" />
+		<result property="member_id" column="member_id" />
+		<result property="movie_id" column="movie_id" />
+		<result property="movie_title" column="movie_title" />
+		<result property="movie_price" column="movie_price" />
+		<result property="movie_people_qty" column="movie_people_qty" />
+		<result property="movie_seat_number" column="movie_seat_number" />
+		<result property="orderer_name" column="orderer_name" />
+		<result property="receiver_name" column="receiver_name" />
+		<result property="receiver_hp1" column="receiver_hp1" />
+		<result property="receiver_hp2" column="receiver_hp2" />
+		<result property="receiver_hp3" column="receiver_hp3" />
+		<result property="ticket_number" column="ticket_number" />
+		<result property="articleno" column="articleno" />
 
+		<result property="pay_method" column="pay_method" />
+		<result property="card_com_name" column="card_com_name" />
+		<result property="card_pay_month" column="card_pay_month" />
+
+		<result property="pay_orderer_hp_num"
+			column="pay_orderer_hp_num" />
+		<result property="pay_order_time" column="pay_order_time" />
+		<result property="final_total_price" column="final_total_price" />
+
+		<result property="movie_fileName" column="movie_fileName" />
+	</resultMap>
 	<resultMap id="adminImageFileVO" type="imageFileVO">
 		<result property="image_id" column="image_id" />
 		<result property="boardNO" column="boardNO" />
@@ -33,7 +59,8 @@
 
 
 	<insert id="movieInsert" parameterType="java.util.Map">
-		insert into movie_details(
+		insert into
+		movie_details(
 		movie_id,
 		movie_title,
 		movie_genre,
@@ -63,7 +90,8 @@
 	</insert>
 
 	<select id="NewMovieId" resultType="int">
-		select nvl(max(movie_id),0)+1 from movie_details
+		select nvl(max(movie_id),0)+1
+		from movie_details
 	</select>
 
 	<insert id="insertMovieImageFile" parameterType="imageFileVO">
@@ -71,16 +99,16 @@
 			order="BEFORE">
 			select seq_image_id.nextval from dual
 		</selectKey>
-		   insert into movie_detail_image   (image_id,
-		                                     movie_id,
-											 fileName,
-											 fileType
-											 )
-								values	(#{image_id},
-										 #{movie_id},
-										 #{fileName},
-										 #{fileType}
-										)
+		insert into movie_detail_image (image_id,
+		movie_id,
+		fileName,
+		fileType
+		)
+		values (#{image_id},
+		#{movie_id},
+		#{fileName},
+		#{fileType}
+		)
 	</insert>
 
 	<select id="movieManageList" resultMap="adminMovieVO">
@@ -97,25 +125,19 @@
 	</select>
 
 	<delete id="deleteMovie" parameterType="int">
-		<![CDATA[
 		delete from movie_details
 		where movie_id = #{movie_id}
-		]]>
 	</delete>
 
 	<select id="deleteMovieImage" resultMap="adminImageFileVO"
 		parameterType="int">
-		<![CDATA[
 		select filename from movie_detail_image
 		where movie_id = #{movie_id}
-		]]>
 	</select>
 
 	<delete id="deleteMovieImageDB" parameterType="int">
-		<![CDATA[
 		delete from movie_detail_image
 		where movie_id = #{movie_id}
-		]]>
 	</delete>
 
 	<update id="updateMovieInfo" parameterType="java.util.HashMap">
@@ -165,10 +187,10 @@
 
 	<select id="selectMovieImageFileList"
 		resultMap="adminImageFileVO" parameterType="int">
-	SELECT * FROM  MOVIE_DETAIL_IMAGE 
-		    	WHERE  
-			    MOVIE_ID= #{MOVIE_ID}
-			    ORDER BY IMAGE_ID ASC	
+		SELECT * FROM MOVIE_DETAIL_IMAGE
+		WHERE
+		MOVIE_ID= #{MOVIE_ID}
+		ORDER BY IMAGE_ID ASC
 	</select>
 
 	<update id="updateMovieImage" parameterType="imageFileVO">
@@ -180,46 +202,6 @@
 		and image_id=#{image_id}
 	</update>
 
-	<update id="updateSeat" parameterType="java.util.HashMap">
-		update movie_seat
-		set
-		seatStatus = 'y'
-		where movie_place = #{movie_place}
-	</update>
 
-	<update id="updateSeat1" parameterType="java.util.HashMap">
-		update movie_seat1
-		set
-		seatStatus = 'y'
-		where movie_place = #{movie_place}
-	</update>
-
-	<update id="updateSeat2" parameterType="java.util.HashMap">
-		update movie_seat2
-		set
-		seatStatus = 'y'
-		where movie_place = #{movie_place}
-	</update>
-
-	<update id="updateSeatN" parameterType="java.util.HashMap">
-		update movie_seat
-		set
-		seatStatus = 'n'
-		where movie_place = #{movie_place}
-	</update>
-
-	<update id="updateSeatN1" parameterType="java.util.HashMap">
-		update movie_seat1
-		set
-		seatStatus = 'n'
-		where movie_place = #{movie_place}
-	</update>
-
-	<update id="updateSeatN2" parameterType="java.util.HashMap">
-		update movie_seat2
-		set
-		seatStatus = 'n'
-		where movie_place = #{movie_place}
-	</update>
 
 </mapper>

@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.cinemoment.movie.member.vo.MemberVO;
 import com.cinemoment.movie.movie.vo.ImageFileVO;
 import com.cinemoment.movie.movie.vo.MovieVO;
+import com.cinemoment.movie.order.vo.OrderVO;
 
 
 @Repository("adminDAO")
@@ -85,35 +87,12 @@ public class AdminDAOImpl implements AdminDAO {
 			sqlSession.update("mapper.admin.updateMovieImage", imageFileVO);
 		}
 	}
-
+	
 	@Override
-	public void updateSeat(Map movieMap) throws DataAccessException {
-		sqlSession.update("mapper.admin.updateSeat", movieMap);
+	public List selectOrderDetailInfo(String member_id)throws DataAccessException{
+		List<OrderVO> selectOrderDetailInfo = sqlSession.selectList("mapper.admin.selectOrderDetailInfo", member_id);
+				return selectOrderDetailInfo;
 	}
 
-	@Override
-	public void updateSeat1(Map movieMap) throws DataAccessException {
-		sqlSession.update("mapper.admin.updateSeat1", movieMap);
-	}
-
-	@Override
-	public void updateSeat2(Map movieMap) throws DataAccessException {
-		sqlSession.update("mapper.admin.updateSeat2", movieMap);
-	}
-
-	@Override
-	public void updateSeatN(Map movieMap) throws DataAccessException {
-		sqlSession.update("mapper.admin.updateSeatN", movieMap);
-	}
-
-	@Override
-	public void updateSeatN1(Map movieMap) throws DataAccessException {
-		sqlSession.update("mapper.admin.updateSeatN1", movieMap);
-	}
-
-	@Override
-	public void updateSeatN2(Map movieMap) throws DataAccessException {
-		sqlSession.update("mapper.admin.updateSeatN2", movieMap);
-	}
 
 }

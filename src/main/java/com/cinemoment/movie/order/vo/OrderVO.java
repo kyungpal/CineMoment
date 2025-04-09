@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 public class OrderVO {
 
 	// movie_details table
+	private String member_id;
+	private int morder_seq_num;
 	private int movie_id;
 	private String movie_title;
 	private String movie_genre;
@@ -28,7 +30,7 @@ public class OrderVO {
 	private String card_name; //card com name -> card_name 수정 25.03.27
 	private String movie_price;
 
-	// moovie_seat table
+	// movie_seat table
 	private String movie_place;
 	private String movie_seat_number;
 	private String seatstatus;
@@ -36,18 +38,88 @@ public class OrderVO {
 	// movie_detail_image
 	private String movie_filename;
 	
+	// movie_schedule
+	private int schedule_id;
+	
+	
+	// movie_seat_status
+	private int seat_id;
+	private String is_reserved;
+
+	
+
 
 	@Override
 	public String toString() {
-		return "OrderVO [movie_id=" + movie_id + ", movie_title=" + movie_title + ", movie_genre=" + movie_genre
-				+ ", movie_time=" + movie_time + ", movie_director=" + movie_director + ", movie_actor=" + movie_actor
-				+ ", movie_story=" + movie_story + ", movie_openday=" + movie_openday + ", movie_rank=" + movie_rank
-				+ ", movie_producer=" + movie_producer + ", movie_status=" + movie_status + ", movie_screening_date="
-				+ movie_screening_date + ", movie_people_qty=" + movie_people_qty + ", movie_running_time="
-				+ movie_running_time + ", ticket_number=" + ticket_number + ", pay_order_time=" + pay_order_time
-				+ ", card_number=" + card_number + ", card_name=" + card_name + ", movie_price=" + movie_price
-				+ ", movie_place=" + movie_place + ", movie_seat_number=" + movie_seat_number + ", seatstatus="
-				+ seatstatus + ", movie_filename=" + movie_filename + "]";
+		return "OrderVO [member_id=" + member_id + ", morder_seq_num=" + morder_seq_num + ", movie_id=" + movie_id
+				+ ", movie_title=" + movie_title + ", movie_genre=" + movie_genre + ", movie_time=" + movie_time
+				+ ", movie_director=" + movie_director + ", movie_actor=" + movie_actor + ", movie_story=" + movie_story
+				+ ", movie_openday=" + movie_openday + ", movie_rank=" + movie_rank + ", movie_producer="
+				+ movie_producer + ", movie_status=" + movie_status + ", movie_screening_date=" + movie_screening_date
+				+ ", movie_people_qty=" + movie_people_qty + ", movie_running_time=" + movie_running_time
+				+ ", ticket_number=" + ticket_number + ", pay_order_time=" + pay_order_time + ", card_number="
+				+ card_number + ", card_name=" + card_name + ", movie_price=" + movie_price + ", movie_place="
+				+ movie_place + ", movie_seat_number=" + movie_seat_number + ", seatstatus=" + seatstatus
+				+ ", movie_filename=" + movie_filename + ", schedule_id=" + schedule_id + ", seat_id=" + seat_id
+				+ ", is_reserved=" + is_reserved + "]";
+	}
+
+
+
+	public int getMorder_seq_num() {
+		return morder_seq_num;
+	}
+
+
+
+	public void setMorder_seq_num(int morder_seq_num) {
+		this.morder_seq_num = morder_seq_num;
+	}
+
+
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
+
+
+	public int getSeat_id() {
+		return seat_id;
+	}
+
+	public void setSeat_id(int seat_id) {
+		this.seat_id = seat_id;
+	}
+
+	public String getIs_reserved() {
+		return is_reserved;
+	}
+
+	public void setIs_reserved(String is_reserved) {
+		this.is_reserved = is_reserved;
+	}
+
+	public int getSchedule_id() {
+		return schedule_id;
+	}
+
+	public void setSchedule_id(int schedule_id) {
+		this.schedule_id = schedule_id;
+	}
+
+	public String getMovie_filename() {
+		return movie_filename;
+	}
+
+	public void setMovie_filename(String movie_filename) {
+		this.movie_filename = movie_filename;
 	}
 
 	public int getMovie_id() {
@@ -226,12 +298,6 @@ public class OrderVO {
 		this.seatstatus = seatstatus;
 	}
 
-	public String getMovie_filename() {
-		return movie_filename;
-	}
-
-	public void setMovie_filename(String movie_filename) {
-		this.movie_filename = movie_filename;
-	}
+	
 	
 	}

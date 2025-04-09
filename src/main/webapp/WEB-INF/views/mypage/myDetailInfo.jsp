@@ -130,11 +130,6 @@ td {
 						<td><select name="hp1" id="hp1">
 								<option value="${member.member_hp1 }">${member.member_hp1 }</option>
 								<option value="010">010</option>
-								<option value="011">011</option>
-								<option value="016">016</option>
-								<option value="017">017</option>
-								<option value="018">018</option>
-								<option value="019">019</option>
 						</select> - <input type="text" name="hp2" maxlength="4"
 							value="${member.member_hp2 }"> - <input type="text"
 							name="hp3" maxlength="4" value="${member.member_hp3 }"><br>

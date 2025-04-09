@@ -79,7 +79,6 @@ public class BoardServiceImpl implements BoardService {
 
 		@Override
 		public void modifyReview(Map<String, Object> boardMap) throws Exception {
-//			Integer boardNO = (Integer) boardMap.get("boardNO");
 		    boardDAO.modifyReview(boardMap);
 		    boardDAO.updateMovieImageFile(boardMap);
 		    

@@ -56,7 +56,7 @@
 							<th>이미지</th>
 							<td><img
 								src="${contextPath}/download.do?boardNO=${board.boardNO}&fileName=${item.fileName}"
-								id="preview" /><br></td>
+								id="preview" style="max-width: 500px; margin: 5px 0;"  /><br></td>
 						</tr>
 					</c:forEach>
 				</c:if>

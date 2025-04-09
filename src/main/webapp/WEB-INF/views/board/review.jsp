@@ -36,7 +36,6 @@
 					</div>
 				</div>
 
-				<!-- board list area -->
 				<div id="board-list">
 					<table class="board-table">
 						<thead>

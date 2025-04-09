@@ -75,15 +75,15 @@ CREATE TABLE "MOVIE_DETAILS"
 	"MOVIE_OPENDAY" VARCHAR2(50 BYTE), 
 	"MOVIE_RANK" VARCHAR2(50 BYTE), 
 	"MOVIE_PRODUCER" VARCHAR2(50 BYTE), 
-	"MOVIE_STATUS" VARCHAR2(50 BYTE) DEFAULT 'y', 
-	"MOVIE_KEYWORD" VARCHAR2(100 BYTE)
+	"MOVIE_STATUS" VARCHAR2(50 BYTE) DEFAULT 'y'
+	--"MOVIE_KEYWORD" VARCHAR2(100 BYTE)
    );
 
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (1,'승부','드라마','118분','김형주','이병헌','세계 최고 바둑 대회에서 국내 최초 우승자가 된 조훈현.<br>
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (1,'승부','드라마','118분','김형주','이병헌','세계 최고 바둑 대회에서 국내 최초 우승자가 된 조훈현.<br>
 전 국민적 영웅으로 대접받던 그는 바둑 신동이라 불리는 이창호를 제자로 맞는다.<br>
 “실전에선 기세가 8할이야” 제자와 한 지붕 아래에서 먹고 자며 가르친 지 수년. <br>
-모두가 스승의 뻔한 승리를 예상했던 첫 사제 대결에서 조훈현은 전 국민이 지켜보는 가운데, 기세를 탄 제자에게 충격적으로 패한다. 오랜만에 패배를 맛본 조훈현과 이제 승부의 맛을 알게 된 이창호 조훈현은 타고난 승부사적 기질을 되살리며 다시 한번 올라갈 결심을 하게 되는데…<br>','2025/03/26','12세 이상 관람가','BH엔터테인먼트','y',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (2,'로비','드라마/코미디','106분','하정우','하정우,김의성,이동휘','"더럽게 싸움을 걸면, 어떻게 더럽게 싸우죠?"<br>
+모두가 스승의 뻔한 승리를 예상했던 첫 사제 대결에서 조훈현은 전 국민이 지켜보는 가운데, 기세를 탄 제자에게 충격적으로 패한다. 오랜만에 패배를 맛본 조훈현과 이제 승부의 맛을 알게 된 이창호 조훈현은 타고난 승부사적 기질을 되살리며 다시 한번 올라갈 결심을 하게 되는데…<br>','2025/03/26','12세 이상 관람가','BH엔터테인먼트','y');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (2,'로비','드라마/코미디','106분','하정우','하정우,김의성,이동휘','"더럽게 싸움을 걸면, 어떻게 더럽게 싸우죠?"<br>
 연구밖에 모르는 스타트업 대표 창욱(하정우)은
 라이벌 회사 대표 광우(박병은)의 뒷거래 때문에 기회도, 기술도 번번히 빼앗긴다.
 그의 회사의 유일한 탈출구는 4조 원에 달하는 국책사업을 따내어, 한방에 자본을 확보하는 것!<br>
@@ -92,8 +92,8 @@ Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIR
 더러운 싸움에 참전하게 되는데...<br>
 마침내 뒷거래가 이뤄지는 골프장에
 한날 한시 각자의 목적을 위해 모인 로비팀들,
-이들의 진흙탕 로비가 펼쳐진다!<br>','2025/04/02','15세 이상 관람가','워크하우스컴퍼니','y',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (3,'고독한 미식가 더 무비','드라마','110분','마츠시케 유타카','마츠시케 유타카','우리들의 밥친구이자 프로 혼밥러 고로 씨 인생 최대 위기 발발!<br>
+이들의 진흙탕 로비가 펼쳐진다!<br>','2025/04/02','15세 이상 관람가','워크하우스컴퍼니','y');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (3,'고독한 미식가 더 무비','드라마','110분','마츠시케 유타카','마츠시케 유타카','우리들의 밥친구이자 프로 혼밥러 고로 씨 인생 최대 위기 발발!<br>
 <br>
 옛 연인의 딸에게 연락을 받고 파리에 도착한 이노가시라 고로(마츠시게 유타카)는
 어린 시절 먹었던 국물을 꼭 다시 맛보고 싶다는 노인의 황당한 부탁을 들어주기로 한다<br>
@@ -104,8 +104,8 @@ Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIR
 <br>
 프랑스 파리에서 시작해 일본의 외딴섬, 한국 남풍도 및 거제도를 찍고, 다시 일본 도쿄로!
 오로지 궁극의 국물을 위한 고로 씨의 맛있는 모험이 펼쳐진다!<br>
-<br>','2025/03/19','전체 관람가','쿄도텔레비전','y',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (4,'플로우','애니메이션','85분','긴츠 질발로디스','고양이, 골든리트리버, 뱀잡이수리','파도가 끝나는 곳,
+<br>','2025/03/19','전체 관람가','쿄도텔레비전','y');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (4,'플로우','애니메이션','85분','긴츠 질발로디스','고양이, 골든리트리버, 뱀잡이수리','파도가 끝나는 곳,
 고양이의 모험이 시작된다!<br>
 인간이 살았던 흔적만이 남아있는 세상,<br>
 홀로 집을 지키던 고양이는 갑작스러운 대홍수로
@@ -114,8 +114,8 @@ Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIR
 그 안에서 골든 리트리버, 카피바라,
 여우원숭이, 뱀잡이수리를 만나고
 서로의 차이점을 극복하고
-팀을 이뤄 험난한 파도를 헤쳐나간다.','2025/03/19','전체 관람가','드림웰스튜디오','y',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (5,'미키17','드라마,어드벤처','137분','봉준호','로버트패틴슨,스티븐 연','“당신은 몇 번째 미키입니까?”<br>
+팀을 이뤄 험난한 파도를 헤쳐나간다.','2025/03/19','전체 관람가','드림웰스튜디오','y');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (5,'미키17','드라마,어드벤처','137분','봉준호','로버트패틴슨,스티븐 연','“당신은 몇 번째 미키입니까?”<br>
 <br>
 친구 ‘티모’와 함께 차린 마카롱 가게가 쫄딱 망해 거액의 빚을 지고
 못 갚으면 죽이겠다는 사채업자를 피해 지구를 떠나야 하는 ‘미키’.
@@ -128,8 +128,8 @@ Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIR
 행성 당 1명만 허용된 익스펜더블이 둘이 된 ‘멀티플’ 상황
 둘 중 하나는 죽어야 하는 현실 속에 걷잡을 수 없는 사건이 기다리고 있었으니…<br>
 <br>
-“자알 죽고, 내일 만나”<br>','2025/02/28','15세 이상 관람가','오프스크린','y',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (6,'드라이브 인 타이페이','액션','100분','조지 황','루크 에반스','타이페이의 도심을 뒤흔드는 폭발적 카체이싱!
+“자알 죽고, 내일 만나”<br>','2025/02/28','15세 이상 관람가','오프스크린','y');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (6,'드라이브 인 타이페이','액션','100분','조지 황','루크 에반스','타이페이의 도심을 뒤흔드는 폭발적 카체이싱!
 목숨을 건 브레이크 없는 추격전이 시작된다! <br>
 최강의 마약단속국 블랙 요원, 존 롤러(루크 에반스).
 익명의 정보원으로부터 극비 밀고를 받은 그는
@@ -143,18 +143,18 @@ Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIR
 도시 전체가 폭발할 듯한 총격전이 펼쳐진다!<br>
 터질듯한 RPM!
 브레이크는 필요 없다!
-지금, 전속력으로 질주하라!<br>','2025/04/11','15세 이상 관람가','유로파코프','e',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (7,'미션임파서블 파이널레코닝','액션','130분','크리스토퍼 맥쿼리','톰 크루즈','미션 임파서블 시리즈의 8번째 영화이자 마지막 영화. 전작인 《미션 임파서블: 데드 레코닝》에서 바로 이어지는 내용이다.<br>','2025/05/23','15세 이상 관람가','스카이댄스미디어','e',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (8,'거룩한밤 데몬헌터스','액션','92분','임대희','마동석,서현,이다윗','악을 숭배하는 집단에 의해 혼란에 빠진 도시,
+지금, 전속력으로 질주하라!<br>','2025/04/11','15세 이상 관람가','유로파코프','e');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (7,'미션임파서블 파이널레코닝','액션','130분','크리스토퍼 맥쿼리','톰 크루즈','미션 임파서블 시리즈의 8번째 영화이자 마지막 영화. 전작인 《미션 임파서블: 데드 레코닝》에서 바로 이어지는 내용이다.<br>','2025/05/23','15세 이상 관람가','스카이댄스미디어','e');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (8,'거룩한밤 데몬헌터스','액션','92분','임대희','마동석,서현,이다윗','악을 숭배하는 집단에 의해 혼란에 빠진 도시,
 특별한 능력을 가진 어둠의 해결사 ‘거룩한 밤’ 팀
 바우(마동석), 샤론(서현), 김군(이다윗)이
-악의 무리를 처단하는 오컬트 액션<br>','2025/04/30','15세 이상 관람가','(주)빅펀치픽처스','e',null);
-Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS,MOVIE_KEYWORD) values (9,'너의 췌장을 먹고 싶어','드라마','192분','츠키카와 쇼','하마베 미나미, 키타쿠라 타쿠미','스스로를 외톨이로 만드는 나, 학교 최고의 인기인 그녀. <br>
+악의 무리를 처단하는 오컬트 액션<br>','2025/04/30','15세 이상 관람가','(주)빅펀치픽처스','e');
+Insert into MOVIE_DETAILS (MOVIE_ID,MOVIE_TITLE,MOVIE_GENRE,MOVIE_TIME,MOVIE_DIRECTOR,MOVIE_ACTOR,MOVIE_STORY,MOVIE_OPENDAY,MOVIE_RANK,MOVIE_PRODUCER,MOVIE_STATUS) values (9,'너의 췌장을 먹고 싶어','드라마','192분','츠키카와 쇼','하마베 미나미, 키타쿠라 타쿠미','스스로를 외톨이로 만드는 나, 학교 최고의 인기인 그녀. <br>
 <br>
 어느 날, 우연히 주운 [공병문고]를 통해 나는 그녀와 비밀을 공유하게 되었다. 
 너 한 사람밖에 없어. 나에게 평범한 나날을 선사해줄 사람<br>
 네가 건넨 영원히 잊지 못할 고백.
-그때 나는 그 말의 의미를 알지 못했다. <br>','2025/04/09','12세 이상 관람가','도호','e',null);
+그때 나는 그 말의 의미를 알지 못했다. <br>','2025/04/09','12세 이상 관람가','도호','e');
 
 CREATE UNIQUE INDEX "SYS_C007701" ON "MOVIE_DETAILS" ("MOVIE_ID");
 ALTER TABLE "MOVIE_DETAILS" ADD PRIMARY KEY ("MOVIE_ID") ENABLE;
@@ -186,7 +186,7 @@ CREATE TABLE "MOVIE_ORDER"
 	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
 	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
 	"MOVIE_PEOPLE_QTY" NUMBER(5,0), 
-	"MOVIE_FILENAME" VARCHAR2(60 BYTE), 
+	--"MOVIE_FILENAME" VARCHAR2(60 BYTE), 
 	"PAY_METHOD" VARCHAR2(200 BYTE), 
 	"CARD_NAME" VARCHAR2(50 BYTE), 
 	"CARD_PAY_MONTH" VARCHAR2(20 BYTE), 
@@ -211,181 +211,25 @@ NOCYCLE;
 
 CREATE TABLE "MOVIE_SEAT" 
    (	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
-	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
-	"SEATSTATUS" VARCHAR2(100 BYTE) DEFAULT 'y'
+	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE) 
    );
-
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','1','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','2','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','3','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','4','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','5','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','6','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','7','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','8','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','9','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','10','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','11','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','12','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','13','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','14','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','15','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','16','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','17','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','18','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','19','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','20','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','21','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','22','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','23','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','24','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','25','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','26','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','27','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','28','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','29','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','30','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','31','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','32','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','33','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','34','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','35','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','36','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','37','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','38','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','39','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','40','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','41','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','42','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','43','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','44','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','45','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','46','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','47','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','48','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','49','y');
-Insert into MOVIE_SEAT (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('1관','50','y');
 
 CREATE UNIQUE INDEX "SYS_C007711" ON "MOVIE_SEAT" ("MOVIE_SEAT_NUMBER");
 ALTER TABLE "MOVIE_SEAT" ADD PRIMARY KEY ("MOVIE_SEAT_NUMBER") ENABLE;
 
 CREATE TABLE "MOVIE_SEAT1" 
    (	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
-	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
-	"SEATSTATUS" VARCHAR2(100 BYTE) DEFAULT 'y'
+	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE)
    );
-
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','1','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','2','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','3','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','4','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','5','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','6','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','7','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','8','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','9','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','10','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','11','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','12','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','13','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','14','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','15','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','16','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','17','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','18','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','19','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','20','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','21','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','22','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','23','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','24','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','25','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','26','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','27','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','28','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','29','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','30','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','31','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','32','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','33','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','34','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','35','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','36','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','37','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','38','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','39','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','40','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','41','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','42','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','43','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','44','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','45','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','46','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','47','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','48','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','49','y');
-Insert into MOVIE_SEAT1 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('2관','50','y');
 
   CREATE UNIQUE INDEX "SYS_C007721" ON "MOVIE_SEAT1" ("MOVIE_SEAT_NUMBER");
   ALTER TABLE "MOVIE_SEAT1" ADD PRIMARY KEY ("MOVIE_SEAT_NUMBER") ENABLE;
 
 CREATE TABLE "MOVIE_SEAT2" 
    (	"MOVIE_PLACE" VARCHAR2(100 BYTE), 
-	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE), 
-	"SEATSTATUS" VARCHAR2(100 BYTE) DEFAULT 'y'
+	"MOVIE_SEAT_NUMBER" VARCHAR2(100 BYTE)
+
    );
-
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','1','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','2','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','3','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','4','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','5','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','6','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','7','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','8','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','9','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','10','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','11','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','12','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','13','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','14','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','15','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','16','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','17','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','18','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','19','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','20','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','21','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','22','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','23','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','24','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','25','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','26','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','27','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','28','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','29','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','30','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','31','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','32','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','33','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','34','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','35','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','36','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','37','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','38','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','39','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','40','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','41','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','42','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','43','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','44','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','45','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','46','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','47','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','48','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','49','y');
-Insert into MOVIE_SEAT2 (MOVIE_PLACE,MOVIE_SEAT_NUMBER,SEATSTATUS) values ('3관','50','y');
-
   CREATE UNIQUE INDEX "SYS_C007722" ON "MOVIE_SEAT2" ("MOVIE_SEAT_NUMBER");
   ALTER TABLE "MOVIE_SEAT2" ADD PRIMARY KEY ("MOVIE_SEAT_NUMBER") ENABLE;
 

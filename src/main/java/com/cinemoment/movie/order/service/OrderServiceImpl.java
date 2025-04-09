@@ -1,5 +1,6 @@
 package com.cinemoment.movie.order.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cinemoment.movie.order.dao.OrderDAO;
 import com.cinemoment.movie.order.vo.OrderVO;
+import com.cinemoment.movie.order.vo.SeatVO;
 
 @Service("orderService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -30,30 +32,11 @@ public class OrderServiceImpl implements OrderService {
 		return titleList2;
 	}
 
-	@Override
-	public List<OrderVO> selectSeatList1() throws Exception {
-		List<OrderVO> seatList1 = orderDAO.seatStatusList1();
-		return seatList1;
-	}
-	
-	@Override
-	public List<OrderVO> selectSeatList2() throws Exception {
-		List<OrderVO> seatList2 = orderDAO.seatStatusList2();
-		return seatList2;
-	}
-	
-	@Override
-	public List<OrderVO> selectSeatList3() throws Exception {
-		List<OrderVO> seatList3 = orderDAO.seatStatusList3();
-		return seatList3;
-	}
 	
 	@Override
 	public void addOrder(Map orderMap) throws Exception {
 		orderDAO.addOrder(orderMap);
-		orderDAO.seatStatusUpdate1(orderMap);
-		orderDAO.seatStatusUpdate2(orderMap);
-		orderDAO.seatStatusUpdate3(orderMap);
+		orderDAO.seatStatusUpdate(orderMap);
 	}
 	
 	@Override
@@ -66,6 +49,40 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderVO> selectMyOrderDetailInfo(String member_id) throws Exception {
 		List<OrderVO> selectMyOrderDetailInfo = orderDAO.selectMyOrderDetailInfo(member_id);
 		return selectMyOrderDetailInfo;
+	}
+	
+	@Override
+	public List<OrderVO> selectSchedulesByMovieId(int movie_id) throws Exception{
+		return orderDAO.selectSchedulesByMovieId(movie_id);
+	}
+	
+	@Override
+	public List<SeatVO> selectSeatListByPlace(Map<String, Object> paramMap) throws Exception{
+		return orderDAO.selectSeatListByPlace(paramMap);
+	}
+	
+	@Override
+	public OrderVO selectScheduleById(int schedule_id) throws Exception {
+	    return orderDAO.selectScheduleById(schedule_id);
+	}
+	
+	@Override
+	public List<OrderVO> selectAllOrderAndSeatStatus() throws Exception {
+	    return orderDAO.selectAllOrderList();
+	}
+
+	
+	@Override
+	public void orderCancel(int morder_seq_num,int schedule_id, int seat_id) throws Exception{
+	    orderDAO.deleteSeatStatus(schedule_id, seat_id);
+		orderDAO.orderCancel(morder_seq_num);
+	}
+	
+	
+	@Override
+	public void adminOrderCancel(int morder_seq_num, int schedule_id, int seat_id)throws Exception{
+		orderDAO.deleteSeatStatus(schedule_id, seat_id);
+		orderDAO.orderCancel(morder_seq_num);
 	}
 	
 	

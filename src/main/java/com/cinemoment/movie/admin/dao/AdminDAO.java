@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.cinemoment.movie.member.vo.MemberVO;
 import com.cinemoment.movie.movie.vo.ImageFileVO;
 import com.cinemoment.movie.movie.vo.MovieVO;
 
@@ -31,16 +32,6 @@ public interface AdminDAO {
 
 	public void updateMovieImage(List<ImageFileVO> imageFileList) throws DataAccessException;
 
-	public void updateSeat(Map movieMap) throws DataAccessException;
-
-	public void updateSeat1(Map movieMap) throws DataAccessException;
-
-	public void updateSeat2(Map movieMap) throws DataAccessException;
-
-	public void updateSeatN(Map movieMap) throws DataAccessException;
-
-	public void updateSeatN1(Map movieMap) throws DataAccessException;
-
-	public void updateSeatN2(Map movieMap) throws DataAccessException;
+	public List selectOrderDetailInfo(String member_id)throws DataAccessException;
 
 }

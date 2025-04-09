@@ -24,6 +24,8 @@ font-family: 'GongGothicMedium';
 	<table class="list_view">
 		<tbody align=center>
 			<tr >
+				
+				
 				<td class="font"><strong>예매영화</strong></td>
 				<td class="font"><strong>관람시간</strong></td>
 				<td class="font"><strong>좌석</strong></td>
@@ -39,6 +41,7 @@ font-family: 'GongGothicMedium';
 					<c:forEach var="item" items="${orderInfoList }" varStatus="i">
 						<c:if test="${orderInfoList != null }">
 						<tr>
+						
 							<td class="font"><strong>${item.movie_title }</strong></td>
 							<td class="font"><strong>${item.movie_screening_date }/${item.movie_running_time }</strong></td>
 							<td class="font"><strong>${item.movie_place } ,${item.movie_seat_number }번 좌석</strong></td>
